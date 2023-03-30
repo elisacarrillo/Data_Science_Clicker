@@ -14,6 +14,11 @@ class Classroom {
                     required: true,
                     unique: true,
                 },
+                // create array of student ids 
+                student: {
+                    type: [String]
+
+                },
                 createdAt: {
                     type: Date,
                     default: Date.now,
@@ -41,8 +46,11 @@ class Classroom {
         }
 
 
+
+
     
 }
+
 
 export default Classroom;
 

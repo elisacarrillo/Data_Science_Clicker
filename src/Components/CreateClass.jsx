@@ -74,7 +74,7 @@ const createClass = () => {
         } placeholder="Class Name"/>
         <br></br>
         <br></br>
-        { !classStarted ? <button onClick={() => setClassStarted(true)}>Start Class</button> : <><p>Class Started!</p>
+        { !classStarted ? <button onClick={() => setClassStarted(true) && addClass}>Start Class</button> : <><p>Class Started!</p>
         <p>Joined Students:</p></>}
         
         </> : null}
