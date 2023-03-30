@@ -12,7 +12,8 @@ class Service {
 
   async getAll(query) {
     let { skip, limit } = query;
-
+    console.log("getting all")
+    console.log("query: ", query)
     skip = skip ? Number(skip) : 0;
     limit = limit ? Number(limit) : 10;
 

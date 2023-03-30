@@ -6,21 +6,23 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./Components/Header";
 
-import Landing from "./Pages/Landing";
+import LandingPage from "./Pages/Landing";
 import CreateClass from "./Pages/CreateClass";
 import Classroom from "./Pages/Classroom";
 import Joined from "./Pages/Joined";
+import InstrClass from "./Pages/InstrClass";
 
 function App() {
   return (
     <div className="app">
-      <Header />
       <Router>
+        <Header />
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/createClass" element={<CreateClass />} />
-          <Route path="/join" element={<Classroom />} />
-          <Route path="/joined" element={<Joined />} />
+          <Route path="/classroom/start/:id" element={<Classroom />} />
+          <Route path="/joined/:id" element={<Joined />} />
+          <Route path="/classroom/:id" element={<InstrClass />} />
         </Routes>
       </Router>
     </div>
