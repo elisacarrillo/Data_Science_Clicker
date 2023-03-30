@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route}
 
 import LandingPage from './Components/Landing';
 import CreateClass from './Components/CreateClass';
+import Classroom from './Components/Classroom';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/createClass" element={<CreateClass />} />
+        <Route path="/join" element = {<Classroom />} /> 
       </Routes>
     </Router>
 
