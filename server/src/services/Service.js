@@ -8,6 +8,7 @@ class Service {
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
   }
+  
 
   async getAll(query) {
     let { skip, limit } = query;
@@ -106,5 +107,8 @@ class Service {
     }
   }
 }
+
+
+
 
 export default Service;

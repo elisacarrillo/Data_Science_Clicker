@@ -12,7 +12,7 @@ router.use((req, res, next) => {
 
 
 
-    
+
 
 import ClassroomController from "../controllers/ClassroomController";
 
@@ -20,6 +20,7 @@ router.get(`/`, ClassroomController.getAll);
 router.post(`/`, ClassroomController.insert);
 router.put(`/:id`, ClassroomController.update);
 router.delete(`/:id`, ClassroomController.delete);
+router.post('/:id/student', ClassroomController.insertStudent);
 
 export default router;
 
