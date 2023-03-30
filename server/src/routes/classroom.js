@@ -20,7 +20,11 @@ router.get(`/`, ClassroomController.getAll);
 router.post(`/`, ClassroomController.insert);
 router.put(`/:id`, ClassroomController.update);
 router.delete(`/:id`, ClassroomController.delete);
-router.post('/:id/student', ClassroomController.insertStudent);
+router.post('/:classCode/student', ClassroomController.insertStudent);
+// query that class code of student matches class code of classroom
+// router.get('/:id/student', ClassroomController.getAll);
+router.get('/:classCode/student', ClassroomController.getStudents)
+
 
 export default router;
 
