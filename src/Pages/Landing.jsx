@@ -56,9 +56,6 @@ function NewLanding() {
             <a href="/createClass">Create a class</a>
           </li>
           <li>
-            <a href="/join">Join a class</a>
-          </li>
-          <li>
             <a href="/settings">Settings</a>
           </li>
         </ul>
