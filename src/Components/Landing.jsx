@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 
 const LandingPage = () => {
+
+  
     return (
     <div className="container">
         <h1>Data Science Clicker</h1>
