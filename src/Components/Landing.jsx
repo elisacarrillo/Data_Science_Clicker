@@ -2,19 +2,18 @@ import react from 'react';
 
 const LandingPage = () => {
     return (
-    <div className="LandingPage">
-      
-        <div className="Landing-form">
-        <input style={{border: "2px solid #FE532D", marginBottom: '1vh'}} type="text" placeholder="Classroom Code" />
-
-        <input style={ {border: "2px solid #FE532D", marginBottom: '1vh'} } type="text" placeholder="Name" />
-        <button>Join</button>
-        <br></br>
-        <button onClick={() => window.location.href = '/createClass'}>Create Class</button>
-        
+    <div className="App">
+        <h1>Data Science Clicker</h1>
+  
+        <div className='Content'> 
+          <form>
+            <p> Join code:</p>
+            <input type="text" name="name" maxLength={4}/>
+            <p> NetID: </p> 
+            <input type="text" name="name"/>
+            <button className='joinbutton'> Join</button>
+          </form> 
         </div>
-         
-     
     </div>
     );
 }
