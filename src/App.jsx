@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter as Router, Routes, Route}
-    from 'react-router-dom';
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import LandingPage from './Components/Landing';
 import CreateClass from './Components/CreateClass';
@@ -12,10 +11,8 @@ import Joined from './Components/Joined';
 import InstrClass from './Components/InstrClass';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-
+    <div className="app">
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -25,8 +22,9 @@ function App() {
         <Route path="/classroom/:id" element={<InstrClass />} />
       </Routes>
     </Router>
+    </div>
 
   )
 }
 
-export default App
+export default App;
