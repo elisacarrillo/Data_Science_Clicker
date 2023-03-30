@@ -30,7 +30,8 @@ function NewLanding() {
           type="text"
           id="code"
           name="code"
-          placeholder="Enter code here"
+          placeholder="Enter 4 digit code here"
+          maxLength={4}
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
