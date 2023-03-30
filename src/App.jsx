@@ -2,24 +2,24 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route}
+    from 'react-router-dom';
+
+import LandingPage from './Components/Landing';
+import CreateClass from './Components/CreateClass';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <h1>Data Science Clicker</h1>
 
-      <div className='Content'> 
-        <form>
-          <p> Join code:</p>
-          <input type="text" name="name" maxLength={4}/>
-          <p> NetID: </p> 
-          <input type="text" name="name"/>
-          <button className='joinbutton'> Join</button>
-        </form> 
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/createClass" element={<CreateClass />} />
+      </Routes>
+    </Router>
+
   )
 }
 
