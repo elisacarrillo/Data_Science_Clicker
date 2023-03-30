@@ -1,0 +1,27 @@
+{
+  "name": "data-science-clicker-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "dev:start": "clear; nodemon --exec babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob Shalabi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mongoose": "^6.10.4",
+    "mongoose-unique-validator": "^3.1.0",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "nodemon": "^2.0.22"
+  }
+}
