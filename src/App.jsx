@@ -4,27 +4,27 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from "./Components/Header";
-
-import Landing from "./Pages/Landing";
-import CreateClass from "./Pages/CreateClass";
-import Classroom from "./Pages/Classroom";
-import Joined from "./Pages/Joined";
+import LandingPage from './Components/Landing';
+import CreateClass from './Components/CreateClass';
+import Classroom from './Components/Classroom';
+import Joined from './Components/Joined';
+import InstrClass from './Components/InstrClass';
 
 function App() {
   return (
     <div className="app">
-      <Header />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/createClass" element={<CreateClass />} />
-          <Route path="/join" element={<Classroom />} />
-          <Route path="/joined" element={<Joined />} />
-        </Routes>
-      </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/createClass" element={<CreateClass />} />
+        <Route path="/classroom/start/:id" element = {<Classroom />} /> 
+        <Route path="/joined/:id" element = {<Joined />} />
+        <Route path="/classroom/:id" element={<InstrClass />} />
+      </Routes>
+    </Router>
     </div>
-  );
+
+  )
 }
 
 export default App;

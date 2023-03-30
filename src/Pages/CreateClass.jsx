@@ -10,6 +10,7 @@ const createClass = () => {
     const [buttonVisible, setButtonVisible] = useState(false);
     const [className, setClassName] = useState("");
     const [classStarted, setClassStarted] = useState(false);
+    const [students, setStudents] = useState([]);
     const generateCode = () => {
         console.log("Generate Code");
         // generate random 4 digit code between 1000 and 9999
@@ -17,7 +18,9 @@ const createClass = () => {
         setButtonVisible(true);
 
     }
-   
+    
+
+                // setStudents(data.data);
 
 
     const addClass = () => {
@@ -38,6 +41,11 @@ const createClass = () => {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            setClassStarted(true);
+            // navigate to /classroom
+            window.location.href="/classroom/"+classCode;
+
+            
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -74,8 +82,12 @@ const createClass = () => {
         } placeholder="Class Name"/>
         <br></br>
         <br></br>
-        { !classStarted ? <button onClick={() => setClassStarted(true) && addClass}>Start Class</button> : <><p>Class Started!</p>
-        <p>Joined Students:</p></>}
+        { !classStarted ? <button onClick={addClass}>Start Class</button> : <><p>Class Started!</p>
+        <p>Joined Students:</p>
+        {students.map((student) => {
+            return <p>{student.name}</p>
+        })}
+        </>}
         
         </> : null}
        
