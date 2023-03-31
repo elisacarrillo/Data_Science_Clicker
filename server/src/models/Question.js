@@ -10,6 +10,10 @@ class Question {
           type: String,
           required: true,
         },
+        code: {
+          type: String,
+          required: true,
+        },
         type: {
           type: String,
           required: true,
