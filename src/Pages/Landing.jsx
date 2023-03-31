@@ -4,11 +4,41 @@ import "./Landing.css";
 function NewLanding() {
   const [code, setCode] = useState("");
   const [netid, setNetid] = useState("");
+  const [showJoined, setShowJoined] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: form submission logic
-    alert("form logic not implemented yet");
+    joinClass();
+    
+  };
+  const joinClass = async () => {
+    console.log("Join Class");
+    fetch('http://localhost:3000/api/classroom/' + code + '/student', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: netid,
+            code: code
+        })  
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        setShowJoined(true);
+        // navigate to /classroom
+        window.location.href="/joined/"+code;
+        
+    }
+    )
+    .catch((error) => {
+        console.error('Error:', error);
+    }
+    );
+
+    
   };
 
   return (

@@ -89,7 +89,7 @@ const InstrClass = () => {
                 const url = window.location.href;
                 const classCode = url.substring(url.lastIndexOf('/') + 1);
                 console.log(classCode);
-                window.location.href = "/classroom/start/"+classCode;
+                window.location.href = "/classroom/instructor/"+classCode;
             }
         //  getStudents();
          

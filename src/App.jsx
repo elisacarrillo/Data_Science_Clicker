@@ -11,6 +11,7 @@ import CreateClass from "./Pages/CreateClass";
 import Classroom from "./Pages/Classroom";
 import Joined from "./Pages/Joined";
 import InstrClass from "./Pages/InstrClass";
+import InstructorClassroomStart from "./Pages/InstrView";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/classroom/start/:id" element={<Classroom />} />
           <Route path="/joined/:id" element={<Joined />} />
           <Route path="/classroom/:id" element={<InstrClass />} />
+          <Route path="/classroom/instructor/:id" element={<InstructorClassroomStart />} />
         </Routes>
       </Router>
     </div>

@@ -14,6 +14,8 @@ router.use((req, res, next) => {
 
 router.get(`/`, QuestionController.getAll);
 router.post(`/`, QuestionController.insert);
+router.post('/:code', QuestionController.insertQuestion);
+router.get('/:code', QuestionController.getQuestions);
 router.put(`/:id`, QuestionController.update);
 router.delete(`/:id`, QuestionController.delete);
 
