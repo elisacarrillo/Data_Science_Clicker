@@ -46,12 +46,12 @@ function App() {
           <Route path="/classroom/start/:id" element={<Classroom />} />
           <Route path="/joined/:id" element={<Joined />} />
           <Route path="/classroom/:id" element={<InstrClass />} />
-<<<<<<< HEAD
+
           <Route path="/classroom/instructor/:id" element={<InstructorClassroomStart />} />
-=======
+
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
->>>>>>> 0fc5d0684b8ef81b0705317881a56c5e3b30146b
+
         </Routes>
       </Router>
     </div>

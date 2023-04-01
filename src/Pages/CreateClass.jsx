@@ -36,7 +36,8 @@ const createClass = () => {
             body: JSON.stringify({
                 code: classCode,
                 name: className
-            })
+            }),
+           
         })
         .then(response => response.json())
         .then(data => {

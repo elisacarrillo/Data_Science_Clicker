@@ -3,7 +3,7 @@ import ClassroomController from "../controllers/ClassroomController";
 const classroomRouter = express.Router();
 
 classroomRouter.get(`/`, ClassroomController.getAll);
-classroomRouter.post(`/`, ClassroomController.insert);
+classroomRouter.post(`/`    , ClassroomController.insert);
 classroomRouter.put(`/:id`, ClassroomController.update);
 classroomRouter.delete(`/:id`, ClassroomController.delete);
 classroomRouter.post("/:classCode/student", ClassroomController.insertStudent);
