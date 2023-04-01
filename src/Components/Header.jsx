@@ -7,9 +7,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import illiniLogo from "/src/assets/block-i.png";
 import "./Header.css";
-import { checkAuth } from "../Services/auth";
 
-function Header({ isAuthenticated, setAuthStatus }) {
+function Header({ isAuthenticated, setIsAuthenticated, user }) {
   return (
     <header className="header">
       <a href="/">

@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 
 import { checkAuth, login } from "../Services/auth";
 
-function Login() {
+function Login({ setIsAuthenticated, setUser }) {
   const [netid, setNetid] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log("logging in...");
     const res = await login(netid);
+    console.log("\t", res);
     if (res.isAuthenticated) {
+      setIsAuthenticated(true);
+      setUser(res.user);
       window.location.href = "/";
+    } else {
+      alert("Login failed");
     }
   };
 
@@ -26,6 +32,9 @@ function Login() {
         />
         <button type="submit">Login</button>
       </form>
+      <button onClick={async () => console.log(await checkAuth())}>
+        Check Auth
+      </button>
     </div>
   );
 }

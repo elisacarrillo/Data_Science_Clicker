@@ -6,11 +6,8 @@ export const checkAuth = async () => {
     const response = await axios.get(`${BASE_URL}/api/auth/isAuthenticated`, {
       withCredentials: true,
     });
-    return response.data.isAuthenticated;
+    return response.data;
   } catch (error) {
-    if (error.response && error.response.status === 401) {
-      return false;
-    }
     alert(error);
     return false;
   }
@@ -18,7 +15,23 @@ export const checkAuth = async () => {
 
 export const login = async (netid) => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/auth/login`, { netid });
+    const response = await axios.post(
+      `${BASE_URL}/api/auth/login`,
+      { netid },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return false;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/auth/logout`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     alert(error);
