@@ -1,22 +1,21 @@
 import express from "express";
-import cors from "cors";
 import QuestionController from "../controllers/QuestionController";
-const router = express.Router();
-router.use(cors());
+const QuestionRouter = express.Router();
 
-router.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    next();
-  });
-  
+QuestionRouter.get(`/`, QuestionController.getAll);
+QuestionRouter.post(`/`, QuestionController.insert);
+QuestionRouter.put(`/:id`, QuestionController.update);
+QuestionRouter.delete(`/:id`, QuestionController.delete);
 
-router.get(`/`, QuestionController.getAll);
-router.post(`/`, QuestionController.insert);
-router.post('/:code', QuestionController.insertQuestion);
-router.get('/:code', QuestionController.getQuestions);
-router.put(`/:id`, QuestionController.update);
-router.delete(`/:id`, QuestionController.delete);
 
-export default router;
+QuestionRouter.get(`/`, QuestionController.getAll);
+QuestionRouter.post(`/`, QuestionController.insert);
+QuestionRouter.post('/:code', QuestionController.insertQuestion);
+QuestionRouter.get('/:code', QuestionController.getQuestions);
+QuestionRouter.put(`/:id`, QuestionController.update);
+QuestionRouter.delete(`/:id`, QuestionController.delete);
+
+
+
+export default QuestionRouter;
+
