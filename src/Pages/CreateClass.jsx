@@ -28,15 +28,18 @@ const createClass = () => {
         console.log("Add Class");
         console.log(classCode);
         console.log(className);
-        fetch('http://localhost:3000/api/classroom', {
+        fetch('http://localhost:3000/api/classrooms', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
+            mode: 'no-cors',
             body: JSON.stringify({
-                code: classCode,
-                name: className
+                joinCode: "1111",
+                name: "className"
             }),
+            // remove cors
+            
            
         })
         .then(response => response.json())

@@ -1,6 +1,12 @@
 import express from "express";
+
 import ClassroomController from "../controllers/ClassroomController";
+
+
 const classroomRouter = express.Router();
+
+
+
 
 classroomRouter.get(`/`, ClassroomController.getAll);
 classroomRouter.post(`/`    , ClassroomController.insert);

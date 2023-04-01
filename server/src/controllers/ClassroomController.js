@@ -17,7 +17,7 @@ class ClassroomController extends Controller {
       // const classCode2 = classCode.slice(0, -1);
 
       // pass a query
-      const classroom = await this.service.getAll({ code: classCode });
+      const classroom = await this.service.getAll({ joinCode: classCode });
       console.log("students: " + classroom.data[0].student);
       console.log(classroom);
       res.status(200).json(classroom.data[0].student);
@@ -28,7 +28,7 @@ class ClassroomController extends Controller {
   // define new method for inserting student into classroom
   insertStudent = async (req, res) => {
     try {
-      console.log("code: ", code);
+      console.log("inserting student");
       console.log(req);
 
       console.log("req.body.name: ", req.body.name);
