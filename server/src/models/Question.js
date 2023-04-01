@@ -1,4 +1,3 @@
-import mongoose, { Schema } from "mongoose";
 
 const QuestionSchema = new Schema(
   {
@@ -19,6 +18,7 @@ const QuestionSchema = new Schema(
       type: Number,
       required: function () {
         return this.type === "numeric";
+>>>>>>> 628cc6ee938601ab839a09e9cb5155234a7d6e92
       },
     },
     multipleChoiceAnswers: {

@@ -11,10 +11,13 @@ import CreateClass from "./Pages/CreateClass";
 import Classroom from "./Pages/Classroom";
 import Joined from "./Pages/Joined";
 import InstrClass from "./Pages/InstrClass";
+
+import InstructorClassroomStart from "./Pages/InstrView";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
 
 import { checkAuth } from "./Services/auth";
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,8 +46,12 @@ function App() {
           <Route path="/classroom/start/:id" element={<Classroom />} />
           <Route path="/joined/:id" element={<Joined />} />
           <Route path="/classroom/:id" element={<InstrClass />} />
+<<<<<<< HEAD
+          <Route path="/classroom/instructor/:id" element={<InstructorClassroomStart />} />
+=======
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
+>>>>>>> 0fc5d0684b8ef81b0705317881a56c5e3b30146b
         </Routes>
       </Router>
     </div>
