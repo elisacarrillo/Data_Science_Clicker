@@ -18,24 +18,26 @@ import { checkAuth } from "./Services/auth";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
     const setAuthStatus = async () => {
-      const authenticated = await checkAuth();
-      setIsAuthenticated(authenticated);
+      const response = await checkAuth();
+      setIsAuthenticated(response.isAuthenticated);
+      setUser(response.user);
     };
     setAuthStatus();
   }, []);
 
-  const setAuthStatus = (status) => {
-    setIsAuthenticated(status);
-  };
-
+  console.log("isAuthenticated:", isAuthenticated);
+  console.log("user:", user);
   return (
     <div className="app">
       <Router>
         <Header
           isAuthenticated={isAuthenticated}
-          setAuthStatus={setAuthStatus}
+          setIsAuthenticated={setIsAuthenticated}
+          user={user}
         />
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -43,7 +45,25 @@ function App() {
           <Route path="/classroom/start/:id" element={<Classroom />} />
           <Route path="/joined/:id" element={<Joined />} />
           <Route path="/classroom/:id" element={<InstrClass />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                setIsAuthenticated={setIsAuthenticated}
+                setUser={setUser}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                user={user}
+                setIsAuthenticated={setIsAuthenticated}
+                setUser={setUser}
+              />
+            }
+          />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Router>
