@@ -8,7 +8,9 @@ export default async function login(req, res) {
       res.status(401).json({ error: "You are not authenticated." });
     }
     req.session.user = user;
-    res.status(200).json(user);
+    res
+      .status(200)
+      .json({ user, isAuthenticated: true, message: "You are authenticated." });
   } catch (e) {
     res.status(400).json({
       message: "There was an error logging in.",
