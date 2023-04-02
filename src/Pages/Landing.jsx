@@ -9,14 +9,20 @@ function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
   const [netid, setNetid] = useState("");
 
   const handleAuth = async () => {
-    const res = await login(netid);
-    if (!res.isAuthenticated) {
-      alert("Authentication failed, please try again.");
-      return null;
-    } else {
-      setIsAuthenticated(true);
-      setUser(res.user);
-      return res.user;
+    try {
+      const res = await login(netid);
+      if (res.isAuthenticated) {
+        setIsAuthenticated(true);
+        setUser(res.user);
+        return res.user;
+      } else {
+        const { user } = await register(netid);
+        setIsAuthenticated(true);
+        setUser(user);
+        return user;
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 

@@ -10,12 +10,6 @@ export default async function login(req, res) {
         isAuthenticated: false,
       });
       return;
-      // const user = new User({
-      //   netid: netid,
-      //   name: `${netid}-name`,
-      //   role: "student",
-      // });
-      // await user.save();
     }
     req.session.user = user;
     res
