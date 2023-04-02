@@ -32,8 +32,10 @@ class UserController extends Controller {
         user.classrooms.includes(classroom._id) &&
         classroom.students.includes(user._id)
       ) {
-        return res.status(400).json({
+        return res.status(200).json({
           message: "User already in classroom.",
+          classroom: classroom,
+          user: user,
         });
       }
 
