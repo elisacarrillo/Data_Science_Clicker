@@ -18,7 +18,6 @@ import Profile from "./Pages/Profile";
 
 import { checkAuth } from "./Services/auth";
 
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
@@ -49,9 +48,20 @@ function App() {
           <Route path="/joined/:id" element={<Joined />} />
           <Route path="/classroom/:id" element={<InstrClass />} />
 
-            <Route path="/classroom/instructor/:id" element={<InstructorClassroomStart />} />
+          <Route
+            path="/classroom/instructor/:id"
+            element={<InstructorClassroomStart />}
+          />
 
-            <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                setIsAuthenticated={setIsAuthenticated}
+                setUser={setUser}
+              />
+            }
+          />
           <Route
             path="/login"
             element={
@@ -73,7 +83,6 @@ function App() {
           />
 
           <Route path="*" element={<h1>404 Not Found</h1>} />
-
         </Routes>
       </Router>
     </div>

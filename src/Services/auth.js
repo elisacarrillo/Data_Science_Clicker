@@ -29,7 +29,7 @@ export const login = async (netid) => {
 
 export const logout = async () => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/auth/logout`, {
+    const response = await axios.post(`${BASE_URL}/api/auth/logout`, null, {
       withCredentials: true,
     });
     return response.data;

@@ -19,7 +19,6 @@ function Profile({ user, setIsAuthenticated, setUser }) {
       <div className="container">
         <h1>Profile</h1>
         <p>Not logged in</p>
-        <p>{"u shouldn't be seeing this screen, something broke :("}</p>
       </div>
     );
   }
