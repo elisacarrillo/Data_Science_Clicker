@@ -6,6 +6,7 @@ UserRouter.get(`/`, UserController.getAll);
 UserRouter.put(`/:id`, UserController.update);
 UserRouter.delete(`/:id`, UserController.delete);
 UserRouter.post(`/joinClassroom`, UserController.joinClassroom);
+UserRouter.get(`/:userId/joinedClassrooms`, UserController.getJoinedClassrooms);
 
 // TODO: Implement this route
 // UserRouter.get(`/:id`, UserController.getAll);

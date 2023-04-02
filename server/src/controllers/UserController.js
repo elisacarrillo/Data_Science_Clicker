@@ -9,6 +9,7 @@ class UserController extends Controller {
   constructor(service) {
     super(service);
     this.joinClassroom = this.joinClassroom.bind(this);
+    this.getJoinedClassrooms = this.getJoinedClassrooms.bind(this);
   }
 
   async joinClassroom(req, res) {
@@ -53,6 +54,33 @@ class UserController extends Controller {
         message: "User joined classroom.",
         classroom: classroom,
         user: user,
+      });
+    } catch (e) {
+      res.status(500).json({
+        message: "Internal Server Error",
+        error: e.message,
+      });
+    }
+  }
+
+  async getJoinedClassrooms(req, res) {
+    const { userId } = req.params;
+    console.log("userId", userId);
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found.",
+        });
+      }
+
+      const classroomObjs = await Classroom.find({
+        _id: { $in: user.classrooms },
+      });
+
+      return res.status(200).json({
+        message: "User joined classrooms.",
+        classrooms: classroomObjs,
       });
     } catch (e) {
       res.status(500).json({
