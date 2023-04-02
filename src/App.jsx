@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./Components/Header";
 
-import LandingPage from "./Pages/Landing";
+import LandingPage from "./Pages/LandingPage";
 import CreateClass from "./Pages/CreateClass";
 import Classroom from "./Pages/Classroom";
 import ClassroomStudentView from "./Pages/ClassroomStudentView";
-import InstrClass from "./Pages/InstrClass";
+import ClassroomInstructorView from "./Pages/ClassroomInstructorView";
 
 import InstructorClassroomStart from "./Pages/InstrView";
 import Login from "./Pages/Login";
@@ -58,7 +58,10 @@ function App() {
             path="/classroom/:id/student"
             element={<ClassroomStudentView />}
           />
-          <Route path="/classroom/:id/instructor" element={<InstrClass />} />
+          <Route
+            path="/classroom/:id/instructor"
+            element={<ClassroomInstructorView />}
+          />
 
           <Route
             path="/classroom/instructor/:id"

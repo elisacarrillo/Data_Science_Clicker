@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { joinClassroom, createClassroom } from "../Services/api";
 import { login } from "../Services/auth";
-import "./Landing.css";
+import "./LandingPage.css";
 
 function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
   const [joinCode, setJoinCode] = useState("");
