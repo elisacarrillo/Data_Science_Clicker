@@ -53,11 +53,11 @@ function App() {
             }
           />
           <Route path="/createClass" element={<CreateClass />} />
-          <Route path="/classroom/start/:id" element={<Classroom />} />
           <Route
             path="/classroom/:id/student"
             element={<ClassroomStudentView />}
           />
+          <Route path="/classroom/:id/student/start" element={<Classroom />} />
           <Route
             path="/classroom/:id/instructor"
             element={<ClassroomInstructorView />}
@@ -78,15 +78,6 @@ function App() {
             }
           />
           <Route
-            path="/login"
-            element={
-              <Login
-                setIsAuthenticated={setIsAuthenticated}
-                setUser={setUser}
-              />
-            }
-          />
-          <Route
             path="/profile"
             element={
               <Profile
@@ -97,7 +88,6 @@ function App() {
               />
             }
           />
-
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Router>
