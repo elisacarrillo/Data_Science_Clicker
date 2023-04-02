@@ -9,7 +9,7 @@ import Header from "./Components/Header";
 import LandingPage from "./Pages/Landing";
 import CreateClass from "./Pages/CreateClass";
 import Classroom from "./Pages/Classroom";
-import Joined from "./Pages/Joined";
+import ClassroomStudentView from "./Pages/ClassroomStudentView";
 import InstrClass from "./Pages/InstrClass";
 
 import InstructorClassroomStart from "./Pages/InstrView";
@@ -31,8 +31,6 @@ function App() {
     setAuthStatus();
   }, []);
 
-  console.log("isAuthenticated:", isAuthenticated);
-  console.log("user:", user);
   return (
     <div className="app">
       <Router>
@@ -40,13 +38,27 @@ function App() {
           isAuthenticated={isAuthenticated}
           setIsAuthenticated={setIsAuthenticated}
           user={user}
+          setUser={setUser}
         />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/"
+            element={
+              <LandingPage
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={user}
+                setUser={setUser}
+              />
+            }
+          />
           <Route path="/createClass" element={<CreateClass />} />
           <Route path="/classroom/start/:id" element={<Classroom />} />
-          <Route path="/joined/:id" element={<Joined />} />
-          <Route path="/classroom/:id" element={<InstrClass />} />
+          <Route
+            path="/classroom/:id/student"
+            element={<ClassroomStudentView />}
+          />
+          <Route path="/classroom/:id/instructor" element={<InstrClass />} />
 
           <Route
             path="/classroom/instructor/:id"
@@ -75,8 +87,9 @@ function App() {
             path="/profile"
             element={
               <Profile
-                user={user}
+                isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
+                user={user}
                 setUser={setUser}
               />
             }

@@ -11,7 +11,6 @@ export default async function logout(req, res) {
         res.status(200).json({ message: "You have been logged out." });
       }
     });
-    console.log("Logged out");
   } catch (e) {
     res.status(400).json({
       message: "There was an error logging you out.",

@@ -1,40 +1,33 @@
-import React, { useEffect, useState } from "react";
-
-import { checkAuth, login } from "../Services/auth";
+import React, { useState } from "react";
+import { login } from "../Services/auth";
+import "./Login.css";
 
 function Login({ setIsAuthenticated, setUser }) {
   const [netid, setNetid] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("logging in...");
     const res = await login(netid);
-    console.log("\t", res);
     if (res.isAuthenticated) {
-      setIsAuthenticated(true);
-      setUser(res.user);
-      window.location.href = "/";
+      window.location.href = "/profile";
     } else {
-      alert("Login failed");
+      alert("Login failed, please try again.");
     }
   };
 
   return (
     <div className="container">
-      <form onSubmit={handleLogin}>
-        <label htmlFor="netid">NetID:</label>
+      <form onSubmit={handleLogin} className="form-group">
         <input
           onChange={(e) => setNetid(e.target.value)}
           type="text"
           name="netid"
           value={netid}
+          placeholder="NetID"
           required
         />
         <button type="submit">Login</button>
       </form>
-      <button onClick={async () => console.log(await checkAuth())}>
-        Check Auth
-      </button>
     </div>
   );
 }

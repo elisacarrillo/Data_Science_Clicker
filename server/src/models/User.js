@@ -21,10 +21,8 @@ const UserSchema = new Schema(
       default: "student",
     },
     classrooms: {
-      
-        type: [Schema.Types.ObjectId],
-        ref: "classrooms",
-      
+      type: [Schema.Types.ObjectId],
+      ref: "classrooms",
     },
     createdAt: {
       type: Date,
