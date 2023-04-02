@@ -5,6 +5,7 @@ function NewLanding() {
   const [code, setCode] = useState("");
   const [netid, setNetid] = useState("");
   const [showJoined, setShowJoined] = useState(false);
+  const [classroomId, setClassroomId] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,30 +15,60 @@ function NewLanding() {
   };
   const joinClass = async () => {
     console.log("Join Class");
-    fetch('http://localhost:3000/api/classroom/' + code + '/student', {
+    // query to find classroomId from code
+    const response = await fetch("http://localhost:3000/api/classrooms?joinCode="+code, {
+        method: 'GET',
+        
+        headers: {
+            'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            console.log("DATA", data.data[0]._id)
+            var id = data.data[0]._id;
+            console.log(id);
+            setClassroomId( data.data[0]._id);
+            console.log(id);
+                    })
+        .catch((error) => {
+
+            console.error('Error:', error);
+        });
+        console.log("CLASSROOMID", classroomId);
+           
+        const resp2 = await fetch("http://localhost:3000/api/users", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: netid,
-            code: code
-        })  
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        setShowJoined(true);
-        // navigate to /classroom
-        window.location.href="/joined/"+code;
-        
-    }
-    )
-    .catch((error) => {
-        console.error('Error:', error);
-    }
-    );
+            },
+            body: JSON.stringify({
+                netid: netid,
+                name: netid,
+                email: "null",
+                role: "student",
+                classrooms: [classroomId]
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                console.log("big success");
+                window.location.href ="/joined/"+classroomId;
+                
+          
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
+
+
+
+            
+    
+   
     
   };
 

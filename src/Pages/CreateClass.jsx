@@ -28,22 +28,26 @@ const createClass = () => {
         console.log("Add Class");
         console.log(classCode);
         console.log(className);
-        fetch('http://localhost:3000/api/classroom', {
+        fetch('http://localhost:3000/api/classrooms', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                code: classCode,
+                joinCode: classCode,
                 name: className
-            })
+            }),
+            // remove cors
+            
+           
         })
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
             setClassStarted(true);
             // navigate to /classroom
-            window.location.href="/classroom/"+classCode;
+            console.log(data.item._id)
+            window.location.href="/classroom/"+data.item._id;
 
             
         })
