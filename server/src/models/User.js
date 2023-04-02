@@ -20,10 +20,16 @@ const UserSchema = new Schema(
       enum: ["student", "instructor"],
       default: "student",
     },
-    classrooms: {
-      type: [Schema.Types.ObjectId],
-      ref: "classrooms",
-    },
+    // classrooms: {
+    //   type: [Schema.Types.ObjectId],
+    //   ref: "classrooms",
+    // },
+    classrooms: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "classrooms",
+      },
+    ],
     createdAt: {
       type: Date,
       default: Date.now,
@@ -35,6 +41,42 @@ const UserSchema = new Schema(
   },
   { timestamps: true }
 );
+
+UserSchema.post("save", async function (doc) {
+  console.log("Saved User: ", doc);
+
+  const Classroom = mongoose.model("classrooms");
+  const promises = [];
+
+  // Update classroom when user is added
+  doc.classrooms.forEach((classroomId) => {
+    promises.push(
+      Classroom.updateOne(
+        { _id: classroomId },
+        {
+          $addToSet: { students: doc._id },
+        }
+      )
+    );
+  });
+
+  // Update classroom when user is removed
+  const oldUser = await User.findById(doc._id);
+  oldUser.classrooms.forEach((classroomId) => {
+    if (!doc.classrooms.includes(classroomId)) {
+      promises.push(
+        Classroom.updateOne(
+          { _id: classroomId },
+          {
+            $pull: { students: doc._id },
+          }
+        )
+      );
+    }
+  });
+
+  await Promise.all(promises);
+});
 
 const User = mongoose.model("users", UserSchema);
 
