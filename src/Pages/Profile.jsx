@@ -16,7 +16,7 @@ function Profile({ isAuthenticated, setIsAuthenticated, user, setUser }) {
           setCreatedClassrooms(res1.data);
 
           const res2 = await getJoinedClassrooms(user._id);
-          setJoinedClassrooms(res2);
+          setJoinedClassrooms(res2.classrooms);
         }
       } catch (err) {
         console.log(err);
@@ -55,7 +55,7 @@ function Profile({ isAuthenticated, setIsAuthenticated, user, setUser }) {
           ) : (
             <ul>
               {createdClassrooms.map((classroom) => (
-                <li key={classroom._id}>
+                <li key={`created${classroom._id}`}>
                   <a href={`/classroom/${classroom._id}/instructor`}>
                     {classroom.name}
                   </a>
@@ -71,17 +71,10 @@ function Profile({ isAuthenticated, setIsAuthenticated, user, setUser }) {
           ) : (
             <ul>
               {joinedClassrooms.map((classroom) => (
-                <li key={classroom._id}>
-                  <a href={`/classroom/${classroom._id}/instructor`}>
+                <li key={`join${classroom._id}`}>
+                  <a href={`/classroom/${classroom._id}/student`}>
                     {classroom.name}
                   </a>
-                  <button
-                    onClick={() => {
-                      window.location.href = `/classroom/${classroom._id}/instructor`;
-                    }}
-                  >
-                    View Instructor
-                  </button>
                 </li>
               ))}
             </ul>
