@@ -49,6 +49,8 @@ class UserController extends Controller {
 
       return res.status(200).json({
         message: "User joined classroom.",
+        classroom: classroom,
+        user: user,
       });
     } catch (e) {
       res.status(500).json({
