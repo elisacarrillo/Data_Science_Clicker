@@ -10,6 +10,6 @@ UserRouter.delete(`/:id`, UserController.delete);
 UserRouter.get(`/:id`, UserController.getAll);
 
 // Handled by auth middleware
-// UserRouter.post(`/`, UserController.insert);
+UserRouter.post(`/`, UserController.insert);
 
 export default UserRouter;

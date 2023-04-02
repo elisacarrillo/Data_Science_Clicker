@@ -33,10 +33,9 @@ const createClass = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            mode: 'no-cors',
             body: JSON.stringify({
-                joinCode: "1111",
-                name: "className"
+                joinCode: classCode,
+                name: className
             }),
             // remove cors
             
@@ -47,7 +46,8 @@ const createClass = () => {
             console.log('Success:', data);
             setClassStarted(true);
             // navigate to /classroom
-            window.location.href="/classroom/"+classCode;
+            console.log(data.item._id)
+            window.location.href="/classroom/"+data.item._id;
 
             
         })

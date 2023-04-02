@@ -20,6 +20,12 @@ const UserSchema = new Schema(
       enum: ["student", "instructor"],
       default: "student",
     },
+    classrooms: {
+      
+        type: [Schema.Types.ObjectId],
+        ref: "classrooms",
+      
+    },
     createdAt: {
       type: Date,
       default: Date.now,

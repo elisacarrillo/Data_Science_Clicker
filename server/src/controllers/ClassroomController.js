@@ -11,14 +11,15 @@ class ClassroomController extends Controller {
   getStudents = async (req, res) => {
     console.log("getting students");
     try {
-      const { classCode } = req.params;
-      console.log("code: ", classCode);
+      const { classCode } = req.params.classroomId;
+      console.log(req.params.classroomId);
+      console.log("code: ", req.params.classroomId);
       // trim last char of classCode
       // const classCode2 = classCode.slice(0, -1);
 
       // pass a query
-      const classroom = await this.service.getAll({ joinCode: classCode });
-      console.log("students: " + classroom.data[0].student);
+      const classroom = await this.service.getAll({ joinCode: req.params.classroomId });
+      // console.log("students: " + classroom.data[0].student);
       console.log(classroom);
       res.status(200).json(classroom.data[0].student);
     } catch (error) {
@@ -46,6 +47,7 @@ class ClassroomController extends Controller {
       res.status(500).json(error);
     }
   };
+  
 }
 
 export default new ClassroomController(classroomService);
