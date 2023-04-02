@@ -13,6 +13,20 @@ export const checkAuth = async () => {
   }
 };
 
+export const register = async (netid) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/auth/register`,
+      { netid },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return false;
+  }
+};
+
 export const login = async (netid) => {
   try {
     const response = await axios.post(

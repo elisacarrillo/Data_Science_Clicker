@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login } from "../Services/auth";
+import { login, register } from "../Services/auth";
 import "./Login.css";
 
 function Login({ setIsAuthenticated, setUser }) {
@@ -7,11 +7,20 @@ function Login({ setIsAuthenticated, setUser }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await login(netid);
-    if (res.isAuthenticated) {
-      window.location.href = "/profile";
-    } else {
-      alert("Login failed, please try again.");
+    try {
+      const res = await login(netid);
+      if (res.isAuthenticated) {
+        setIsAuthenticated(true);
+        setUser(res.user);
+        window.location.href = "/profile";
+      } else {
+        const { user } = await register(netid);
+        setIsAuthenticated(true);
+        setUser(user);
+        window.location.href = "/profile";
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 

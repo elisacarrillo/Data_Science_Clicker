@@ -3,6 +3,7 @@ import User from "../models/User";
 export default async function register(req, res) {
   try {
     const { netid } = req.body;
+    console.log("netid", netid);
     if (!netid) {
       res.status(400).json({ error: "You must provide a netid." });
       return;

@@ -65,7 +65,6 @@ class UserController extends Controller {
 
   async getJoinedClassrooms(req, res) {
     const { userId } = req.params;
-    console.log("userId", userId);
     try {
       const user = await User.findById(userId);
       if (!user) {
