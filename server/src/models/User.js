@@ -28,6 +28,8 @@ const UserSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "classrooms",
+        unique: true,
+        sparse: true,
       },
     ],
     createdAt: {
@@ -42,41 +44,47 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-UserSchema.post("save", async function (doc) {
-  console.log("Saved User: ", doc);
+// UserSchema.post("save", async function (doc) {
+//   console.log("Saved User: ", doc);
+//   if (this.isNew || this.isModified("classrooms")) {
+//     const Classroom = mongoose.model("classrooms");
+//     const classrooms = await Classroom.find({
+//       _id: { $in: doc.classrooms },
+//     });
+//     const promises = [];
 
-  const Classroom = mongoose.model("classrooms");
-  const promises = [];
+//     // Update classroom when user is added
+//     doc.classrooms.forEach((classroomId) => {
+//       if (!classrooms.includes(classroomId)) {
+//         promises.push(
+//           Classroom.updateOne(
+//             { _id: classroomId },
+//             {
+//               $addToSet: { students: doc._id },
+//             }
+//           )
+//         );
+//       }
+//     });
 
-  // Update classroom when user is added
-  doc.classrooms.forEach((classroomId) => {
-    promises.push(
-      Classroom.updateOne(
-        { _id: classroomId },
-        {
-          $addToSet: { students: doc._id },
-        }
-      )
-    );
-  });
+//     // Update classroom when user is removed
+//     const oldUser = await User.findById(doc._id);
+//     oldUser.classrooms.forEach((classroomId) => {
+//       if (!doc.classrooms.includes(classroomId)) {
+//         promises.push(
+//           Classroom.updateOne(
+//             { _id: classroomId },
+//             {
+//               $pull: { students: doc._id },
+//             }
+//           )
+//         );
+//       }
+//     });
 
-  // Update classroom when user is removed
-  const oldUser = await User.findById(doc._id);
-  oldUser.classrooms.forEach((classroomId) => {
-    if (!doc.classrooms.includes(classroomId)) {
-      promises.push(
-        Classroom.updateOne(
-          { _id: classroomId },
-          {
-            $pull: { students: doc._id },
-          }
-        )
-      );
-    }
-  });
-
-  await Promise.all(promises);
-});
+//     await Promise.all(promises);
+//   }
+// });
 
 const User = mongoose.model("users", UserSchema);
 

@@ -16,7 +16,9 @@ const ClassroomSchema = new Schema(
       required: true,
       unique: true,
     },
-    students: [{ type: Schema.Types.ObjectId, ref: "users" }],
+    students: [
+      { type: Schema.Types.ObjectId, ref: "users", unique: true, sparse: true },
+    ],
     createdAt: {
       type: Date,
       default: Date.now,
@@ -29,49 +31,49 @@ const ClassroomSchema = new Schema(
   { timestamps: true }
 );
 
-ClassroomSchema.pre("save", async function (next) {
-  try {
-    if (this.isNew || this.isModified("students")) {
-      const User = mongoose.model("users");
-      const students = await User.find({ _id: { $in: this.students } });
+// ClassroomSchema.pre("save", async function (next) {
+//   try {
+//     if (this.isNew || this.isModified("students")) {
+//       const User = mongoose.model("users");
+//       const students = await User.find({ _id: { $in: this.students } });
 
-      const promises = [];
+//       const promises = [];
 
-      // Update user when added to class
-      students.forEach((student) => {
-        if (!student.classrooms.includes(this._id)) {
-          promises.push(
-            User.updateOne(
-              { _id: student._id },
-              {
-                $addToSet: { classrooms: this._id },
-              }
-            )
-          );
-        }
-      });
+//       // Update user when added to class
+//       students.forEach((student) => {
+//         if (!student.classrooms.includes(this._id)) {
+//           promises.push(
+//             User.updateOne(
+//               { _id: student._id },
+//               {
+//                 $addToSet: { classrooms: this._id },
+//               }
+//             )
+//           );
+//         }
+//       });
 
-      // Update user when removed from class
-      const oldClassroom = await this.constructor.findById(this._id);
-      oldClassroom.students.forEach((studentId) => {
-        if (!this.students.includes(studentId)) {
-          promises.push(
-            User.updateOne(
-              { _id: studentId },
-              {
-                $pull: { classrooms: this._id },
-              }
-            )
-          );
-        }
-      });
+//       // Update user when removed from class
+//       const oldClassroom = await this.constructor.findById(this._id);
+//       oldClassroom.students.forEach((studentId) => {
+//         if (!this.students.includes(studentId)) {
+//           promises.push(
+//             User.updateOne(
+//               { _id: studentId },
+//               {
+//                 $pull: { classrooms: this._id },
+//               }
+//             )
+//           );
+//         }
+//       });
 
-      await Promise.all(promises);
-    }
-  } catch (err) {
-    next(err);
-  }
-});
+//       await Promise.all(promises);
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 ClassroomSchema.plugin(uniqueValidator);
 const Classroom = mongoose.model("classrooms", ClassroomSchema);

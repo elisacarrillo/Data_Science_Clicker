@@ -5,11 +5,12 @@ const UserRouter = express.Router();
 UserRouter.get(`/`, UserController.getAll);
 UserRouter.put(`/:id`, UserController.update);
 UserRouter.delete(`/:id`, UserController.delete);
+UserRouter.post(`/joinClassroom`, UserController.joinClassroom);
 
 // TODO: Implement this route
-UserRouter.get(`/:id`, UserController.getAll);
+// UserRouter.get(`/:id`, UserController.getAll);
 
 // Handled by auth middleware
-UserRouter.post(`/`, UserController.insert);
+// UserRouter.post(`/`, UserController.insert);
 
 export default UserRouter;
