@@ -30,6 +30,7 @@ function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     e.preventDefault();
     await handleAuth();
     const { classroom, user } = await joinClassroom(joinCode, netid);
+    console.log("classroom", classroom);
     window.location.href = `/classroom/${classroom._id}/student`;
   };
 

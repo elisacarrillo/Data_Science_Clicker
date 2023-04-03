@@ -16,9 +16,7 @@ const ClassroomSchema = new Schema(
       required: true,
       unique: true,
     },
-    students: [
-      { type: Schema.Types.ObjectId, ref: "users", unique: true, sparse: true },
-    ],
+    students: [{ type: Schema.Types.ObjectId, ref: "users" }],
     createdAt: {
       type: Date,
       default: Date.now,
