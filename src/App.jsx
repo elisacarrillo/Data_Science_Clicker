@@ -21,6 +21,7 @@ import { checkAuth } from "./Services/auth";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [classroomData, setClassroomData] = useState(null);
 
   useEffect(() => {
     const setAuthStatus = async () => {
@@ -60,12 +61,28 @@ function App() {
           <Route path="/classroom/:id/student/start" element={<Classroom />} />
           <Route
             path="/classroom/:id/instructor"
-            element={<ClassroomInstructorView />}
+            element={
+              <ClassroomInstructorView
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={user}
+                setUser={setUser}
+                classroomData={classroomData}
+                setClassroomData={setClassroomData}
+              />
+            }
           />
 
           <Route
             path="/classroom/instructor/:id"
-            element={<InstructorClassroomStart />}
+            element={
+              <InstructorClassroomStart
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={user}
+                setUser={setUser}
+              />
+            }
           />
 
           <Route

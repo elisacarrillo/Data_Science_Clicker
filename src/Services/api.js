@@ -57,3 +57,30 @@ export const getJoinedClassrooms = async (studentId) => {
     return false;
   }
 };
+
+export const getClassroom = async (classroomId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/classrooms?_id=${classroomId}&limit=1`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return false;
+  }
+};
+
+export const postQuestion = async (classroomId, question) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/classrooms/${classroomId}/questions`,
+      { question },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return false;
+  }
+};
