@@ -10,11 +10,14 @@ const ClassroomStudentView = () => {
     console.log("Get Class Code");
     // get class code from url
     var url = window.location.href;
-    var classCode = url.substring(url.lastIndexOf("/") + 1);
+    // get class code from url
+    // it is after the second slash
+    var classCode = url.split("/")[4];
+    getJoinCode(classCode);
     setClassCode(classCode);
     console.log(classCode);
   };
-  const getJoinCode = async () => {
+  const getJoinCode = async (classCode) => {
     const response = await fetch(
       "http://localhost:3000/api/classrooms?_id=" + classCode,
       {
@@ -40,8 +43,8 @@ const ClassroomStudentView = () => {
   };
   const start = () => {
     console.log("Start");
-
-    window.location.href = "/classroom/start/" + classCode;
+    console.log(classCode);
+    window.location.href = "/classroom/" + classCode + '/student/start_test';
   };
   useEffect(() => {
     getClassCode();

@@ -15,6 +15,8 @@ import ClassroomInstructorView from "./Pages/ClassroomInstructorView";
 import InstructorClassroomStart from "./Pages/InstrView";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
+import DownloadCSV from "./Pages/DownloadCSV";
+import ClassroomTest from "./Pages/classroom_test";
 
 import { checkAuth } from "./Services/auth";
 
@@ -107,6 +109,8 @@ function App() {
               />
             }
           />
+          <Route path = "/classroom/:id/student/start_test" element={<ClassroomTest/>}/>
+          <Route path="/download" element={<DownloadCSV/>} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Router>

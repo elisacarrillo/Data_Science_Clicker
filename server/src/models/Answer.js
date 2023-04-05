@@ -10,7 +10,7 @@ const AnswerSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "users",
-      required: true,
+      // required: true,
     },
     answer: {
       type: String,
@@ -18,7 +18,7 @@ const AnswerSchema = new Schema(
     },
     isCorrect: {
       type: Boolean,
-      required: true,
+      // required: true,
     },
     createdAt: {
       type: Date,
@@ -27,6 +27,12 @@ const AnswerSchema = new Schema(
     updatedAt: {
       type: Date,
       default: Date.now,
+    },
+    classroomId: {
+      type: Schema.Types.ObjectId,
+      ref: "classrooms",
+      required: true,
+
     },
   },
   { timestamps: true }

@@ -11,7 +11,7 @@ class Service {
 
   async getAll(query) {
     let { skip, limit } = query;
-
+    console.log("getting all", query);
     skip = skip ? Number(skip) : 0;
     limit = limit ? Number(limit) : 10;
 
@@ -24,10 +24,14 @@ class Service {
       } catch (error) {
         console.log("not able to generate mongoose id with content", query._id);
       }
-    }
-
+    } 
+   
+    console.log("query", query)
     try {
+      // let items = await this.model.find(query).skip(skip);
       let items = await this.model.find(query).skip(skip).limit(limit);
+      console.log("items", items)
+      // console.log(this.model.find(query).skip(skip))
       let total = await this.model.count();
 
       return {
