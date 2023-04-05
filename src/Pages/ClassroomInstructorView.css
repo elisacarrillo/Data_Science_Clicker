@@ -1,109 +1,145 @@
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  /* input[type="text"], */
-  input[type="radio"] {
-    margin: 10px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  input[type="radio"] {
-    margin: 0 10px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
 
-  /* input[type="text"] {
-    margin: 10px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-  } */
+input[type="checkbox"] {
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FE532D;
+  transform: scale(2);
+}
 
-  input[type="text"] {
-    width: 100%;
-    height: 4rem;
-  }
 
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .option {
-    display: flex;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #FE532D;
-  }
-  
-  label {
-    display: flex;
-    align-items: center;
-  }
-  
-  button[type="submit"] {
-    margin: 20px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #FE532D;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #f73105;
-  }
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-  
-  .tabs button {
-    border: none;
-    background-color: transparent;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
-    cursor: pointer;
-  }
-  
-  .tabs button.active {
-    color: #FE532D;
-    border-bottom: 2px solid #FE532D;
-  }
-  
-  .options {
-    margin-top: 1rem;
-  }
-  
-  .option {
-    margin-top: 1rem;
-  }
-  
-  .option h1 {
-    margin: 0.5rem 0rem
-  }
-  
-  .input-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* margin-top: 0.5rem; */
-    margin: 0.5rem 0;
-  }
-  
-  
+.option {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FE532D;
+}
+
+label {
+  display: flex;
+  align-items: center;
+}
+
+button[type="submit"] {
+  margin: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FE532D;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #f73105;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  color: #FE532D;
+  border-bottom: 2px solid #FE532D;
+}
+
+.options {
+  margin-top: 1rem;
+}
+
+.option h1 {
+  padding: 0.6rem;
+}
+
+.option {
+  margin-top: 1rem;
+}
+
+.option h1 {
+  margin: 0.5rem 0rem
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: 0.5rem; */
+  margin: 0.5rem 0;
+}
+
+/* question list */
+.questions {
+  padding: 20px;
+}
+
+.questions h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.questions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.questions li {
+  color: black;
+  font-size: 1.4em;
+  background-color: #FE532D;
+  border-radius: 5px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+}
+
+.questions li button {
+  background-color: #14274C;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1em;
+  padding: 10px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  transition: background-color 0.3s;
+}
+
+.questions li button:hover {
+  background-color: #7b02ab;
+}
+
+.questions li button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+}
