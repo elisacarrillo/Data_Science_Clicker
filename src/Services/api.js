@@ -10,7 +10,6 @@ export const joinClassroom = async (joinCode, netid) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -24,7 +23,6 @@ export const createClassroom = async (joinCode, instructorId, name) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -37,7 +35,6 @@ export const getCreatedClassrooms = async (instructorId) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -53,7 +50,6 @@ export const getJoinedClassrooms = async (studentId) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -66,7 +62,6 @@ export const getClassroom = async (classroomId) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -87,7 +82,6 @@ export const getStudents = async (classroom) => {
     );
     return response;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -101,7 +95,6 @@ export const postQuestion = async (question) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -114,7 +107,20 @@ export const getQuestions = async (classroom) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
+    return false;
+  }
+};
+
+export const getAnswerDataCSV = async (questionId) => {
+  return;
+  // TODO: Implement /questions/:qid/answerDataCSV endpoint
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/questions/${questionId}/answerDataCSV`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
     return false;
   }
 };

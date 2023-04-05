@@ -20,6 +20,10 @@ function Landing({
   const handleAuth = async () => {
     try {
       const res = await login(netid);
+      if (!res) {
+        alert("Invalid netid or password");
+        return false;
+      }
       if (res.isAuthenticated) {
         setIsAuthenticated(true);
         setUser(res.user);
@@ -37,25 +41,36 @@ function Landing({
 
   const handleJoinClassroom = async (e) => {
     e.preventDefault();
-    await handleAuth();
-    const { classroom, user } = await joinClassroom(joinCode, netid);
-    setClassroomData(classroom);
-    navigateTo(`/classroom/${classroom._id}/student`);
+    const user = await handleAuth();
+    if (!user) {
+      alert("Authentication failed, please try again");
+      return;
+    }
+    const { classroom, student } = await joinClassroom(joinCode, netid);
+    if (classroom) {
+      setClassroomData(classroom);
+      navigateTo(`/classroom/${classroom._id}/student`);
+    } else {
+      alert("Failed to join classroom, please try again");
+    }
   };
 
   const handleCreateClassroom = async (e) => {
     e.preventDefault();
     const user = await handleAuth();
+    if (!user) {
+      alert("Authentication failed, please try again");
+      return;
+    }
     const classroomName = prompt("Classroom Name");
     const response = await createClassroom(joinCode, user._id, classroomName);
-    const classroom = response.item;
-    setClassroomData(classroom);
-    navigateTo(`/classroom/${classroom._id}/instructor`);
-  };
-
-  const testfn = async () => {
-    const res = await getClassroom(`642a183993e72999868a6c9a`);
-    console.log(res);
+    if (response) {
+      const classroom = response.item;
+      setClassroomData(classroom);
+      navigateTo(`/classroom/${classroom._id}/instructor`);
+    } else {
+      alert("Failed to create classroom, please try again");
+    }
   };
 
   return (
@@ -80,6 +95,7 @@ function Landing({
           maxLength={4}
           value={joinCode}
           onChange={(e) => setJoinCode(e.target.value)}
+          required
         />
         <input
           type="text"
@@ -90,6 +106,7 @@ function Landing({
           maxLength={8}
           value={netid}
           onChange={(e) => setNetid(e.target.value)}
+          required
         />
         <button onClick={handleJoinClassroom}>Join</button>
         <button onClick={handleCreateClassroom}>Create Classroom</button>

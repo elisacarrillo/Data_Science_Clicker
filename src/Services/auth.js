@@ -8,7 +8,6 @@ export const checkAuth = async () => {
     });
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -22,7 +21,6 @@ export const register = async (netid) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -36,7 +34,6 @@ export const login = async (netid) => {
     );
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };
@@ -48,7 +45,6 @@ export const logout = async () => {
     });
     return response.data;
   } catch (error) {
-    alert(error);
     return false;
   }
 };

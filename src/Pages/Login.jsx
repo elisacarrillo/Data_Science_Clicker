@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import { login, register } from "../Services/auth";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
-function Login({ setIsAuthenticated, setUser }) {
+function Login({ isAuthenticated, setIsAuthenticated, user, setUser }) {
+  const navigateTo = useNavigate();
   const [netid, setNetid] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await login(netid);
-      if (res.isAuthenticated) {
+      if (!res) {
+        alert("Invalid netid or password");
+        return false;
+      } else if (res.isAuthenticated) {
         setIsAuthenticated(true);
         setUser(res.user);
-        window.location.href = "/profile";
+        navigateTo("/profile");
       } else {
         const { user } = await register(netid);
+        if (!user) {
+          alert("Failed to register, please try again");
+          return false;
+        }
         setIsAuthenticated(true);
         setUser(user);
-        window.location.href = "/profile";
+        navigateTo("/profile");
       }
     } catch (err) {
+      alert("Error while logging in");
       console.log(err);
     }
   };
