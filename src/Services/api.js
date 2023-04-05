@@ -105,3 +105,16 @@ export const postQuestion = async (question) => {
     return false;
   }
 };
+
+export const getQuestions = async (classroom) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/questions?classroom=${classroom._id}`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return false;
+  }
+};

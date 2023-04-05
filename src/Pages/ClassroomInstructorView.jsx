@@ -1,102 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getClassroom, postQuestion, getStudents } from "../Services/api";
+import {
+  getClassroom,
+  postQuestion,
+  getStudents,
+  getQuestions,
+} from "../Services/api";
+
+import DownloadCSV from "./DownloadCSV";
 
 import "./ClassroomInstructorView.css";
-
-const ClassroomInstructorView = ({
-  isAuthenticated,
-  setIsAuthenticated,
-  user,
-  setUser,
-  classroomData,
-  setClassroomData,
-}) => {
-  const { id } = useParams();
-
-  const [tab, setTab] = useState("mcq");
-
-  const handleTabChange = (tab) => {
-    setTab(tab);
-  };
-
-  useEffect(() => {
-    if (!classroomData) {
-      const fetchData = async () => {
-        const response = await getClassroom(id);
-        if (response.data) {
-          setClassroomData(response.data[0]);
-        }
-      };
-      fetchData();
-    }
-  }, [classroomData]);
-
-  const debugLog = () => {
-    console.log(classroomData);
-  };
-
-  if (!classroomData) {
-    return (
-      <div className="container">
-        <p>Loading Classroom...</p>
-      </div>
-    );
-  }
-  return (
-    <div className="container">
-      <h1>Welcome to {classroomData.name}</h1>
-      <div>
-        <div className="tabs">
-          <button
-            className={tab === "students" ? "active" : ""}
-            onClick={() => handleTabChange("students")}
-          >
-            Students
-          </button>
-          <button
-            className={tab === "mcq" ? "active" : ""}
-            onClick={() => handleTabChange("mcq")}
-          >
-            Create Multiple Choice Question
-          </button>
-          <button
-            className={tab === "numeric" ? "active" : ""}
-            onClick={() => handleTabChange("numeric")}
-          >
-            Create Numeric Input Question
-          </button>
-          <button
-            className={tab === "data" ? "active" : ""}
-            onClick={() => handleTabChange("data")}
-          >
-            Data
-          </button>
-        </div>
-        {tab === "students" && (
-          <StudentList
-            classroomData={classroomData}
-            setClassroomData={setClassroomData}
-          />
-        )}
-        {tab === "mcq" && (
-          <MultipleChoiceForm
-            classroomData={classroomData}
-            setClassroomData={setClassroomData}
-          />
-        )}
-        {tab === "numeric" && (
-          <NumericInputForm
-            classroomData={classroomData}
-            setClassroomData={setClassroomData}
-          />
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default ClassroomInstructorView;
 
 const MultipleChoiceForm = ({ classroomData, setClassroomData }) => {
   const [question, setQuestion] = useState("");
@@ -219,6 +132,43 @@ const NumericInputForm = ({ classroomData, setClassroomData }) => {
   );
 };
 
+const QuestionList = ({ classroomData, setClassroomData }) => {
+  const [questions, setQuestions] = useState([]);
+  const [id, setId] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getQuestions(classroomData);
+      setQuestions(response.data);
+    };
+    fetchData();
+  }, [classroomData]);
+
+  if (!questions) {
+    return <h1>Loading...</h1>;
+  }
+  return (
+    <div className="questions">
+      <h1>Questions</h1>
+      <ul>
+        {questions.map((question) => (
+          <li key={question._id}>
+            {question.prompt}
+            <button
+              onClick={() => {
+                setId(question._id);
+                setClassroomData(question);
+              }}
+            >
+              View
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 const StudentList = ({ classroomData, setClassroomData }) => {
   return <h1>need to implement</h1>;
   const [students, setStudents] = useState([]);
@@ -273,6 +223,113 @@ const StudentList = ({ classroomData, setClassroomData }) => {
     </div>
   );
 };
+
+const ClassroomInstructorView = ({
+  isAuthenticated,
+  setIsAuthenticated,
+  user,
+  setUser,
+  classroomData,
+  setClassroomData,
+}) => {
+  const { id } = useParams();
+
+  const [tab, setTab] = useState("mcq");
+
+  const handleTabChange = (tab) => {
+    setTab(tab);
+  };
+
+  useEffect(() => {
+    if (!classroomData) {
+      const fetchData = async () => {
+        const response = await getClassroom(id);
+        if (response.data) {
+          setClassroomData(response.data[0]);
+        }
+      };
+      fetchData();
+    }
+  }, [classroomData]);
+
+  const debugLog = () => {
+    console.log(classroomData);
+  };
+
+  if (!classroomData) {
+    return (
+      <div className="container">
+        <p>Loading Classroom...</p>
+      </div>
+    );
+  }
+  return (
+    <div className="container">
+      <h1>Welcome to {classroomData.name}</h1>
+      <div>
+        <div className="tabs">
+          {/* <button
+            className={tab === "students" ? "active" : ""}
+            onClick={() => handleTabChange("students")}
+          >
+            Students
+          </button> */}
+          <button
+            className={tab === "mcq" ? "active" : ""}
+            onClick={() => handleTabChange("mcq")}
+          >
+            Create Multiple Choice Question
+          </button>
+          <button
+            className={tab === "numeric" ? "active" : ""}
+            onClick={() => handleTabChange("numeric")}
+          >
+            Create Numeric Input Question
+          </button>
+          <button
+            className={tab === "questions" ? "active" : ""}
+            onClick={() => handleTabChange("questions")}
+          >
+            Questions
+          </button>
+          <button
+            className={tab === "data" ? "active" : ""}
+            onClick={() => handleTabChange("data")}
+          >
+            Data
+          </button>
+        </div>
+        {tab === "students" && (
+          <StudentList
+            classroomData={classroomData}
+            setClassroomData={setClassroomData}
+          />
+        )}
+        {tab === "mcq" && (
+          <MultipleChoiceForm
+            classroomData={classroomData}
+            setClassroomData={setClassroomData}
+          />
+        )}
+        {tab === "numeric" && (
+          <NumericInputForm
+            classroomData={classroomData}
+            setClassroomData={setClassroomData}
+          />
+        )}
+        {tab === "questions" && (
+          <QuestionList
+            classroomData={classroomData}
+            setClassroomData={setClassroomData}
+          />
+        )}
+        {tab === "data" && <DownloadCSV />}
+      </div>
+    </div>
+  );
+};
+
+export default ClassroomInstructorView;
 
 //   const [classId, setClassId] = useState("");
 //   const [joinCode, setJoinCode] = useState("");
