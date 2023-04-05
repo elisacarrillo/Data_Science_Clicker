@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { logout } from "../Services/auth";
 import { getCreatedClassrooms, getJoinedClassrooms } from "../Services/api";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Profile.css";
 
-function Profile({ isAuthenticated, setIsAuthenticated, user, setUser }) {
+function Profile({
+  isAuthenticated,
+  setIsAuthenticated,
+  user,
+  setUser,
+  classroomData,
+  setClassroomData,
+}) {
+  const navigateTo = useNavigate();
   const [joinedClassrooms, setJoinedClassrooms] = useState([]);
   const [createdClassrooms, setCreatedClassrooms] = useState([]);
 
@@ -28,7 +37,8 @@ function Profile({ isAuthenticated, setIsAuthenticated, user, setUser }) {
   const handleLogout = async () => {
     try {
       const res = await logout();
-      window.location.href = "/";
+      // window.location.href = "/";
+      navigateTo("/");
     } catch (err) {
       console.log(err);
     }
@@ -56,9 +66,9 @@ function Profile({ isAuthenticated, setIsAuthenticated, user, setUser }) {
             <ul>
               {createdClassrooms.map((classroom) => (
                 <li key={`created${classroom._id}`}>
-                  <a href={`/classroom/${classroom._id}/instructor`}>
+                  <Link to={`/classroom/${classroom._id}/instructor`}>
                     {classroom.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -72,9 +82,9 @@ function Profile({ isAuthenticated, setIsAuthenticated, user, setUser }) {
             <ul>
               {joinedClassrooms.map((classroom) => (
                 <li key={`join${classroom._id}`}>
-                  <a href={`/classroom/${classroom._id}/student`}>
+                  <Link to={`/classroom/${classroom._id}/student`}>
                     {classroom.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

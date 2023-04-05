@@ -1,10 +1,19 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { joinClassroom, createClassroom } from "../Services/api";
+import { joinClassroom, createClassroom, getClassroom } from "../Services/api";
 import { login } from "../Services/auth";
 import "./LandingPage.css";
 
-function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
+function Landing({
+  isAuthenticated,
+  setIsAuthenticated,
+  user,
+  setUser,
+  classroomData,
+  setClassroomData,
+}) {
+  const navigateTo = useNavigate();
   const [joinCode, setJoinCode] = useState("");
   const [netid, setNetid] = useState("");
 
@@ -30,8 +39,8 @@ function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     e.preventDefault();
     await handleAuth();
     const { classroom, user } = await joinClassroom(joinCode, netid);
-    console.log("classroom", classroom);
-    window.location.href = `/classroom/${classroom._id}/student`;
+    setClassroomData(classroom);
+    navigateTo(`/classroom/${classroom._id}/student`);
   };
 
   const handleCreateClassroom = async (e) => {
@@ -40,7 +49,13 @@ function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     const classroomName = prompt("Classroom Name");
     const response = await createClassroom(joinCode, user._id, classroomName);
     const classroom = response.item;
-    window.location.href = `/classroom/${classroom._id}/instructor`;
+    setClassroomData(classroom);
+    navigateTo(`/classroom/${classroom._id}/instructor`);
+  };
+
+  const testfn = async () => {
+    const res = await getClassroom(`642a183993e72999868a6c9a`);
+    console.log(res);
   };
 
   return (
