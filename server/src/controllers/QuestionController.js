@@ -19,11 +19,12 @@ class QuestionController extends Controller {
 
   getQuestions = async (req, res) => {
     try {
-      const code = req.params;
-      console.log("code: ", code)
-      const result = await this.service.getAll( code);
-      console.log("result: ", result.data)
+      const id = req.params._id;
+      console.log("code: ", id)
+      const result = await this.service.getQuestions(id);
+      console.log("result: ", result)
       console.log(req.params)
+      
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);

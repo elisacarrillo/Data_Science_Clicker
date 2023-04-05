@@ -1,22 +1,37 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { joinClassroom, createClassroom } from "../Services/api";
+import { joinClassroom, createClassroom, getClassroom } from "../Services/api";
 import { login } from "../Services/auth";
-import "./Landing.css";
+import "./LandingPage.css";
 
-function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
+function Landing({
+  isAuthenticated,
+  setIsAuthenticated,
+  user,
+  setUser,
+  classroomData,
+  setClassroomData,
+}) {
+  const navigateTo = useNavigate();
   const [joinCode, setJoinCode] = useState("");
   const [netid, setNetid] = useState("");
 
   const handleAuth = async () => {
-    const res = await login(netid);
-    if (!res.isAuthenticated) {
-      alert("Authentication failed, please try again.");
-      return null;
-    } else {
-      setIsAuthenticated(true);
-      setUser(res.user);
-      return res.user;
+    try {
+      const res = await login(netid);
+      if (res.isAuthenticated) {
+        setIsAuthenticated(true);
+        setUser(res.user);
+        return res.user;
+      } else {
+        const { user } = await register(netid);
+        setIsAuthenticated(true);
+        setUser(user);
+        return user;
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -24,7 +39,8 @@ function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     e.preventDefault();
     await handleAuth();
     const { classroom, user } = await joinClassroom(joinCode, netid);
-    window.location.href = `/classroom/${classroom._id}/student`;
+    setClassroomData(classroom);
+    navigateTo(`/classroom/${classroom._id}/student`);
   };
 
   const handleCreateClassroom = async (e) => {
@@ -33,7 +49,13 @@ function Landing({ isAuthenticated, setIsAuthenticated, user, setUser }) {
     const classroomName = prompt("Classroom Name");
     const response = await createClassroom(joinCode, user._id, classroomName);
     const classroom = response.item;
-    window.location.href = `/classroom/${classroom._id}/instructor`;
+    setClassroomData(classroom);
+    navigateTo(`/classroom/${classroom._id}/instructor`);
+  };
+
+  const testfn = async () => {
+    const res = await getClassroom(`642a183993e72999868a6c9a`);
+    console.log(res);
   };
 
   return (

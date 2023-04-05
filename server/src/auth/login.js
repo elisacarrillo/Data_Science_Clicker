@@ -5,12 +5,11 @@ export default async function login(req, res) {
     const { netid } = req.body;
     const user = await User.findOne({ netid: netid });
     if (!user) {
-      const user = new User({
-        netid: netid,
-        name: `$(netid)-name`,
-        role: "student",
+      res.status(200).json({
+        message: "User not found.",
+        isAuthenticated: false,
       });
-      await user.save();
+      return;
     }
     req.session.user = user;
     res
