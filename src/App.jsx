@@ -50,6 +50,8 @@ function App() {
                 setIsAuthenticated={setIsAuthenticated}
                 user={user}
                 setUser={setUser}
+                classroomData={classroomData}
+                setClassroomData={setClassroomData}
               />
             }
           />

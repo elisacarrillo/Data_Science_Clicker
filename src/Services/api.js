@@ -71,11 +71,11 @@ export const getClassroom = async (classroomId) => {
   }
 };
 
-export const postQuestion = async (classroomId, question) => {
+export const postQuestion = async (question) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/classrooms/${classroomId}/questions`,
-      { question },
+      `${BASE_URL}/api/questions`,
+      { ...question },
       { withCredentials: true }
     );
     return response.data;

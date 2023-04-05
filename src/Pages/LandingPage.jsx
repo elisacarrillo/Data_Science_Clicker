@@ -93,7 +93,6 @@ function Landing({
         />
         <button onClick={handleJoinClassroom}>Join</button>
         <button onClick={handleCreateClassroom}>Create Classroom</button>
-        <button onClick={testfn}>Test</button>
       </form>
     </div>
   );
