@@ -44,7 +44,7 @@ const ClassroomStudentView = () => {
   const start = () => {
     console.log("Start");
     console.log(classCode);
-    window.location.href = "/classroom/" + classCode + '/student/start';
+    window.location.href = "/classroom/" + classCode + '/student/start_test';
   };
   useEffect(() => {
     getClassCode();

@@ -6,7 +6,7 @@ const DownloadCSV = () => {
     const download = () => {
         console.log("DOWNLOADING");
         setDownloadAllowed(true);
-        fetch("http://localhost:3000/api/answers", {
+        fetch("http://localhost:3000/api/answers?limit=0", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
