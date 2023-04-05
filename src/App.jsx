@@ -16,7 +16,7 @@ import InstructorClassroomStart from "./Pages/InstrView";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
 import DownloadCSV from "./Pages/DownloadCSV";
-import ClassroomTest from "./Pages/classroom_test";
+import ClassroomTest from "./Pages/ClassroomStartTest";
 
 import { checkAuth } from "./Services/auth";
 
@@ -60,7 +60,16 @@ function App() {
           <Route path="/createClass" element={<CreateClass />} />
           <Route
             path="/classroom/:id/student"
-            element={<ClassroomStudentView />}
+            element={
+              <ClassroomStudentView
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={user}
+                setUser={setUser}
+                classroomData={classroomData}
+                setClassroomData={setClassroomData}
+              />
+            }
           />
           <Route path="/classroom/:id/student/start" element={<Classroom />} />
           <Route
@@ -93,7 +102,9 @@ function App() {
             path="/login"
             element={
               <Login
+                isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
+                user={user}
                 setUser={setUser}
               />
             }
@@ -106,11 +117,25 @@ function App() {
                 setIsAuthenticated={setIsAuthenticated}
                 user={user}
                 setUser={setUser}
+                classroomData={classroomData}
+                setClassroomData={setClassroomData}
               />
             }
           />
-          <Route path = "/classroom/:id/student/start_test" element={<ClassroomTest/>}/>
-          <Route path="/download" element={<DownloadCSV/>} />
+          <Route
+            path="/classroom/:id/student/start_test"
+            element={
+              <ClassroomTest
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={user}
+                setUser={setUser}
+                classroomData={classroomData}
+                setClassroomData={setClassroomData}
+              />
+            }
+          />
+          <Route path="/download" element={<DownloadCSV />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Router>

@@ -5,7 +5,11 @@ import {
   postQuestion,
   getStudents,
   getQuestions,
+  getAnswerDataCSV,
 } from "../Services/api";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 import DownloadCSV from "./DownloadCSV";
 
@@ -134,7 +138,6 @@ const NumericInputForm = ({ classroomData, setClassroomData }) => {
 
 const QuestionList = ({ classroomData, setClassroomData }) => {
   const [questions, setQuestions] = useState([]);
-  const [id, setId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,6 +146,15 @@ const QuestionList = ({ classroomData, setClassroomData }) => {
     };
     fetchData();
   }, [classroomData]);
+
+  const handleDownload = async () => {
+    const response = await getAnswerDataCSV(classroomData);
+    const blob = new Blob([response], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "answer.csv";
+    link.click();
+  };
 
   if (!questions) {
     return <h1>Loading...</h1>;
@@ -154,13 +166,9 @@ const QuestionList = ({ classroomData, setClassroomData }) => {
         {questions.map((question) => (
           <li key={question._id}>
             {question.prompt}
-            <button
-              onClick={() => {
-                setId(question._id);
-                setClassroomData(question);
-              }}
-            >
-              View
+            <button onClick={handleDownload}>
+              {" "}
+              <FontAwesomeIcon icon={faDownload} />
             </button>
           </li>
         ))}

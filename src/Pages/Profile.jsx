@@ -37,7 +37,6 @@ function Profile({
   const handleLogout = async () => {
     try {
       const res = await logout();
-      // window.location.href = "/";
       navigateTo("/");
     } catch (err) {
       console.log(err);
