@@ -1,6 +1,6 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getClassroom, postQuestion } from "../Services/api";
+import { getClassroom, postQuestion, getStudents } from "../Services/api";
 
 import "./ClassroomInstructorView.css";
 
@@ -49,6 +49,12 @@ const ClassroomInstructorView = ({
       <div>
         <div className="tabs">
           <button
+            className={tab === "students" ? "active" : ""}
+            onClick={() => handleTabChange("students")}
+          >
+            Students
+          </button>
+          <button
             className={tab === "mcq" ? "active" : ""}
             onClick={() => handleTabChange("mcq")}
           >
@@ -60,7 +66,19 @@ const ClassroomInstructorView = ({
           >
             Create Numeric Input Question
           </button>
+          <button
+            className={tab === "data" ? "active" : ""}
+            onClick={() => handleTabChange("data")}
+          >
+            Data
+          </button>
         </div>
+        {tab === "students" && (
+          <StudentList
+            classroomData={classroomData}
+            setClassroomData={setClassroomData}
+          />
+        )}
         {tab === "mcq" && (
           <MultipleChoiceForm
             classroomData={classroomData}
@@ -112,9 +130,10 @@ const MultipleChoiceForm = ({ classroomData, setClassroomData }) => {
       multipleChoiceAnswers: options.map((option) => option.text),
       correctAnswerIndex: options.findIndex((option) => option.isCorrect),
     };
-    console.log("questionData", questionData);
+    // console.log("questionData", questionData);
     const response = await postQuestion(questionData);
-    console.log(response);
+    // console.log(response);
+    alert("Question submitted!");
   };
 
   return (
@@ -173,6 +192,7 @@ const NumericInputForm = ({ classroomData, setClassroomData }) => {
     };
     const response = await postQuestion(questionData);
     // console.log(response);
+    alert("Question submitted!");
   };
 
   return (
@@ -196,6 +216,61 @@ const NumericInputForm = ({ classroomData, setClassroomData }) => {
         <h1>Submit</h1>
       </button>
     </form>
+  );
+};
+
+const StudentList = ({ classroomData, setClassroomData }) => {
+  return <h1>need to implement</h1>;
+  const [students, setStudents] = useState([]);
+  const [id, setId] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getStudents(classroomData);
+      console.log("response", response);
+      setStudents(response);
+    };
+    fetchData();
+  }, [classroomData]);
+
+  function debugLog() {
+    console.log(students);
+  }
+
+  if (!students) {
+    return <h1>Loading...</h1>;
+  }
+  console.log("students", students);
+  return (
+    <div className="students">
+      <h1>Students</h1>
+      <button onClick={debugLog}>
+        <h1>Test</h1>
+      </button>
+      <ul>
+        {students.map((student) => (
+          <li key={student._id}>
+            {student.name}
+            <button
+              onClick={() => {
+                setId(student._id);
+                setClassroomData(student);
+              }}
+            >
+              View
+            </button>
+            <button
+              onClick={() => {
+                setId(student._id);
+                setClassroomData(student);
+              }}
+            >
+              Edit
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
