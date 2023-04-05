@@ -64,6 +64,7 @@ const ClassroomStartTest = ({
         // console.log(response);
       }
     });
+    alert("Submitted!");
     return;
     console.log("SUBMIT");
     for (var i = 0; i < questions.length; i++) {
@@ -145,14 +146,14 @@ const ClassroomStartTest = ({
     return (
       <div>
         <h1>Loading...</h1>
-        <button
+        {/* <button
           onClick={() => {
             console.log("class", classroomData);
             console.log("qadata", questionAnswerData);
           }}
         >
           test
-        </button>
+        </button> */}
       </div>
     );
   }
@@ -196,14 +197,14 @@ const ClassroomStartTest = ({
       </ul>
       <br></br>
       <button onClick={onSubmit}>Submit</button>
-      <button
+      {/* <button
         onClick={() => {
           console.log("class", classroomData);
           console.log("qadata", questionAnswerData);
         }}
       >
         test
-      </button>
+      </button> */}
     </div>
   );
 };
