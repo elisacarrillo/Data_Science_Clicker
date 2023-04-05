@@ -16,7 +16,7 @@ import InstructorClassroomStart from "./Pages/InstrView";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
 import DownloadCSV from "./Pages/DownloadCSV";
-import ClassroomTest from "./Pages/classroom_test";
+import ClassroomTest from "./Pages/ClassroomStartTest";
 
 import { checkAuth } from "./Services/auth";
 
@@ -124,7 +124,16 @@ function App() {
           />
           <Route
             path="/classroom/:id/student/start_test"
-            element={<ClassroomTest />}
+            element={
+              <ClassroomTest
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+                user={user}
+                setUser={setUser}
+                classroomData={classroomData}
+                setClassroomData={setClassroomData}
+              />
+            }
           />
           <Route path="/download" element={<DownloadCSV />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />

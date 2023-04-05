@@ -111,6 +111,19 @@ export const getQuestions = async (classroom) => {
   }
 };
 
+export const postAnswer = async (answer) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/answers`,
+      { ...answer },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const getAnswerDataCSV = async (questionId) => {
   return;
   // TODO: Implement /questions/:qid/answerDataCSV endpoint
