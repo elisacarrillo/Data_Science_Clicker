@@ -15,5 +15,5 @@ This is a platform for communication between a presenter and the audience. The p
 - Navigate to the root directory and run the client using ``npm run dev``
 
 
-Open the browser and go to ``http://127.0.0.1:5173/``
+Open the browser and go to ``http://localhost:5173/``
 
