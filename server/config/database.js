@@ -9,10 +9,10 @@ class Connection {
     mongoose
       .connect(url)
       .then(() => {
-        console.log("DB connection established ✅");
+        console.log("Mongo connection established ✅");
       })
       .catch((err) => {
-        console.log("DB connection failed ❌");
+        console.log("Mongo connection failed ❌");
       });
   }
 }
