@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import {
+  Link,
+  createBrowserRouter,
+  RouterProvider,
+  useRouteError,
+} from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./Components/Header";
@@ -18,9 +24,64 @@ import Profile from "./Pages/Profile";
 import DownloadCSV from "./Pages/DownloadCSV";
 import ClassroomTest from "./Pages/ClassroomStartTest";
 
-import { checkAuth } from "./Services/auth";
+import AuthProvider from "./Helpers/AuthProvider";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/createClass",
+    element: <CreateClass />,
+  },
+  {
+    path: "/classroom/:id/student",
+    element: <ClassroomStudentView />,
+  },
+  {
+    path: "/classroom/:id/student/start",
+    element: <Classroom />,
+  },
+  {
+    path: "/classroom/:id/instructor",
+    element: <ClassroomInstructorView />,
+  },
+  {
+    path: "/classroom/instructor/:id",
+    element: <InstructorClassroomStart />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/download",
+    element: <DownloadCSV />,
+  },
+  {
+    path: "/classroom/:id/student/start_test",
+    element: <ClassroomTest />,
+  },
+  {
+    path: "/download",
+    element: <DownloadCSV />,
+  },
+]);
 
 function App() {
+  return (
+    <div className="app">
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </div>
+  );
+  /* PREVIOUS APP BELOW
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [classroomData, setClassroomData] = useState(null);
@@ -141,6 +202,7 @@ function App() {
       </Router>
     </div>
   );
+  */
 }
 
 export default App;
