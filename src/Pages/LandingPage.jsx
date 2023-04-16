@@ -110,6 +110,7 @@ function Landing({
         />
         <button onClick={handleJoinClassroom}>Join</button>
         <button onClick={handleCreateClassroom}>Create Classroom</button>
+        <Link to="/test/home">test</Link>
       </form>
     </div>
   );

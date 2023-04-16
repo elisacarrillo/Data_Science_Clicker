@@ -12,65 +12,86 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./Components/Header";
 
-import LandingPage from "./Pages/LandingPage";
-import CreateClass from "./Pages/CreateClass";
-import Classroom from "./Pages/Classroom";
-import ClassroomStudentView from "./Pages/ClassroomStudentView";
-import ClassroomInstructorView from "./Pages/ClassroomInstructorView";
+// import LandingPage from "./Pages/LandingPage";
+// import CreateClass from "./Pages/CreateClass";
+// import Classroom from "./Pages/Classroom";
+// import ClassroomStudentView from "./Pages/ClassroomStudentView";
+// import ClassroomInstructorView from "./Pages/ClassroomInstructorView";
 
-import InstructorClassroomStart from "./Pages/InstrView";
-import Login from "./Pages/Login";
-import Profile from "./Pages/Profile";
-import DownloadCSV from "./Pages/DownloadCSV";
-import ClassroomTest from "./Pages/ClassroomStartTest";
+// import InstructorClassroomStart from "./Pages/InstrView";
+// import Login from "./Pages/Login";
+// import Profile from "./Pages/Profile";
+// import DownloadCSV from "./Pages/DownloadCSV";
+// import ClassroomTest from "./Pages/ClassroomStartTest";
 
 import AuthProvider from "./Helpers/AuthProvider";
+
+import TestHome from "./Pages/temp/Home";
+import TestCreateClass from "./Pages/temp/CreateClass";
+import TestClassroomInstructor from "./Pages/temp/ClassroomInstructor";
+import TestClassroomStudent from "./Pages/temp/ClassroomStudent";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: <TestHome />,
   },
   {
     path: "/createClass",
-    element: <CreateClass />,
-  },
-  {
-    path: "/classroom/:id/student",
-    element: <ClassroomStudentView />,
-  },
-  {
-    path: "/classroom/:id/student/start",
-    element: <Classroom />,
-  },
-  {
-    path: "/classroom/:id/instructor",
-    element: <ClassroomInstructorView />,
+    element: <TestCreateClass />,
   },
   {
     path: "/classroom/instructor/:id",
-    element: <InstructorClassroomStart />,
+    element: <TestClassroomInstructor />,
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: "/classroom/student/:id",
+    element: <TestClassroomStudent />,
   },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/download",
-    element: <DownloadCSV />,
-  },
-  {
-    path: "/classroom/:id/student/start_test",
-    element: <ClassroomTest />,
-  },
-  {
-    path: "/download",
-    element: <DownloadCSV />,
-  },
+  // {
+  //   path: "/",
+  //   element: <LandingPage />,
+  // },
+  // {
+  //   path: "/createClass",
+  //   element: <CreateClass />,
+  // },
+  // {
+  //   path: "/classroom/:id/student",
+  //   element: <ClassroomStudentView />,
+  // },
+  // {
+  //   path: "/classroom/:id/student/start",
+  //   element: <Classroom />,
+  // },
+  // {
+  //   path: "/classroom/:id/instructor",
+  //   element: <ClassroomInstructorView />,
+  // },
+  // {
+  //   path: "/classroom/instructor/:id",
+  //   element: <InstructorClassroomStart />,
+  // },
+  // {
+  //   path: "/login",
+  //   element: <Login />,
+  // },
+  // {
+  //   path: "/profile",
+  //   element: <Profile />,
+  // },
+  // {
+  //   path: "/download",
+  //   element: <DownloadCSV />,
+  // },
+  // {
+  //   path: "/classroom/:id/student/start_test",
+  //   element: <ClassroomTest />,
+  // },
+  // {
+  //   path: "/download",
+  //   element: <DownloadCSV />,
+  // },
 ]);
 
 function App() {
