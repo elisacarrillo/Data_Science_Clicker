@@ -12,7 +12,11 @@ import {
 } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { getClassroom, getCreatedClassrooms } from "./Services/api";
+import {
+  getClassroom,
+  getCreatedClassrooms,
+  getQuestions,
+} from "./Services/api";
 
 // import Header from "./Components/Header";
 
@@ -31,7 +35,6 @@ import { getClassroom, getCreatedClassrooms } from "./Services/api";
 import AuthProvider from "./Helpers/AuthProvider";
 
 import Home from "./Pages/temp/Home";
-import CreateClass from "./Pages/temp/CreateClass";
 import ClassroomInstructor from "./Pages/temp/ClassroomInstructor";
 import ClassroomStudent from "./Pages/temp/ClassroomStudent";
 import Instructor from "./Pages/temp/Instructor";
@@ -48,12 +51,22 @@ const router = createBrowserRouter([
   {
     path: "instructor/classroom/:classroomId",
     element: <ClassroomInstructor />,
-    loader: ({ params }) => getClassroom(params.classroomId),
+    loader: async ({ params }) => {
+      return {
+        classroomData: await getClassroom(params.classroomId),
+        questionsData: await getQuestions(params.classroomId),
+      };
+    },
   },
   {
     path: "student/classroom/:classroomId",
     element: <ClassroomStudent />,
-    loader: ({ params }) => getClassroom(params.classroomId),
+    loader: async ({ params }) => {
+      return {
+        classroomData: await getClassroom(params.classroomId),
+        questionsData: await getQuestions(params.classroomId),
+      };
+    },
   },
   // {
   //   path: "/",

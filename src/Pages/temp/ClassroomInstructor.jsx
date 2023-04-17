@@ -3,11 +3,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLoaderData, Link } from "react-router-dom";
 import { postQuestion } from "../../Services/api";
+import socket from "../../socket";
 
 const ClassroomInstructorView = () => {
-  const classroomData = useLoaderData();
+  const { classroomId } = useParams();
+  const { classroomData, questionsData } = useLoaderData();
   const [activeQuestion, setActiveQuestion] = useState(null);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(questionsData);
+
+  useEffect(() => {
+    socket.emit("joinClassroom", classroomId);
+
+    return () => {
+      socket.emit("leaveClassroom", classroomId);
+    };
+  }, [classroomId]);
 
   const handlePostQuestion = async (questionData) => {
     const newQuestion = {
@@ -21,6 +31,11 @@ const ClassroomInstructorView = () => {
 
   const toggleActiveQuestion = (id) => {
     setActiveQuestion(id);
+    socket.emit(
+      "activateQuestion",
+      classroomData._id,
+      questions.find((q) => q._id === id)
+    );
   };
 
   return !classroomData ? (
@@ -43,16 +58,19 @@ const ClassroomInstructorView = () => {
 
 const QuestionsList = ({ questions, activeQuestion, toggleActiveQuestion }) => {
   return (
-    <ul>
-      {questions.map((question) => (
-        <li
-          key={question._id}
-          onClick={() => toggleActiveQuestion(question._id)}
-        >
-          {question.prompt} {activeQuestion === question._id && "*"}
-        </li>
-      ))}
-    </ul>
+    <>
+      <h3>Questions</h3>
+      <ul>
+        {questions.map((question) => (
+          <li
+            key={question._id}
+            onClick={() => toggleActiveQuestion(question._id)}
+          >
+            {question.prompt} {activeQuestion === question._id && "*"}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

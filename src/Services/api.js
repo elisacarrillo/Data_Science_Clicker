@@ -3,18 +3,16 @@
 import BASE_URL from "./baseUrl";
 import axios from "axios";
 
-// export const joinClassroom = async (joinCode, netid) => {
-//   try {
-//     const response = await axios.post(
-//       `${BASE_URL}/api/users/joinClassroom`,
-//       { netid, joinCode },
-//       { withCredentials: true }
-//     );
-//     return response.data;
-//   } catch (error) {
-//     return false;
-//   }
-// };
+export const getClassroomFromJoinCode = async (joinCode) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/classrooms?joinCode=${joinCode}`
+    );
+    return response.data;
+  } catch (error) {
+    return false;
+  }
+};
 
 export const createClassroom = async (name, instructor, joinCode) => {
   try {
@@ -97,15 +95,15 @@ export const postQuestion = async (question) => {
   }
 };
 
-export const getQuestions = async (classroom) => {
+export const getQuestions = async (classroomId) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/questions?classroom=${classroom._id}`,
-      { withCredentials: true }
+      `${BASE_URL}/api/questions?classroom=${classroomId}`
     );
-    return response.data;
+    return response.data.data;
   } catch (error) {
-    return false;
+    console.log(error);
+    alert("Error getting questions");
   }
 };
 

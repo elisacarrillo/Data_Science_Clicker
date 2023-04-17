@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #13294B;
+  /* color-scheme: light dark; */
+  color: rgb(0, 0, 0);
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,4 +23,8 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+}
+
+ul {
+  list-style-type: none;
 }

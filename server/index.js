@@ -23,6 +23,7 @@ const io = socketIO(server, {
 });
 
 io.on("connection", (socket) => {
+  console.log("Client connected");
   // Join a classroom
   socket.on("joinClassroom", (classroomId) => {
     socket.join(classroomId);
@@ -44,16 +45,24 @@ io.on("connection", (socket) => {
   });
 
   // Submit a question
-  socket.on("submitQuestion", async (questionData) => {
-    const newQuestion = await new Question(questionData).save();
-    io.to(newQuestion.classroom).emit("newQuestion", newQuestion);
-  });
+  // socket.on("newQuestion", async (questionData) => {
+  //   const newQuestion = await new Question(questionData).save();
+  //   io.sockets.emit("questionAdded", newQuestion);
+  // });
 
   // // Submit an answer
   // socket.on("submitAnswer", async (answerData) => {
   //   const newAnswer = await new Answer(answerData).save();
   //   io.to(newAnswer.classroom).emit("newAnswer", newAnswer);
   // });
+
+  socket.on("activateQuestion", async (classroomId, questionData) => {
+    io.to(classroomId).emit("questionActivated", questionData);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
 });
 
 const port = process.env.PORT || 3000;

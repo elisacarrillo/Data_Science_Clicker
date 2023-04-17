@@ -48,10 +48,10 @@ const QuestionSchema = new Schema(
       //   message: "Correct answer index must be between 0 and 4.",
       // },
     },
-    active: {
-      type: Boolean,
-      default: false,
-    },
+    // active: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     createdAt: {
       type: Date,
       default: Date.now,
