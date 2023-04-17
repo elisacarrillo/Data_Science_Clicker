@@ -10,28 +10,28 @@ class QuestionController extends Controller {
 
   // TODO:  remove these functions
   //        im pretty sure default controller has these functionalities
-  insertQuestion = async (req, res) => {
-    try {
-      const result = await this.service.insertQuestion(req.body);
-      res.status(200).json(result);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  };
+  // insertQuestion = async (req, res) => {
+  //   try {
+  //     const result = await this.service.insertQuestion(req.body);
+  //     res.status(200).json(result);
+  //   } catch (error) {
+  //     res.status(500).json(error);
+  //   }
+  // };
 
-  getQuestions = async (req, res) => {
-    try {
-      const id = req.params._id;
-      console.log("code: ", id);
-      const result = await this.service.getQuestions(id);
-      console.log("result: ", result);
-      console.log(req.params);
+  // getQuestions = async (req, res) => {
+  //   try {
+  //     const id = req.params._id;
+  //     console.log("code: ", id);
+  //     const result = await this.service.getQuestions(id);
+  //     console.log("result: ", result);
+  //     console.log(req.params);
 
-      res.status(200).json(result);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  };
+  //     res.status(200).json(result);
+  //   } catch (error) {
+  //     res.status(500).json(error);
+  //   }
+  // };
 }
 
 export default new QuestionController(questionService);

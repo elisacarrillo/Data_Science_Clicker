@@ -1,10 +1,12 @@
 // Home.jsx
 
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../Helpers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
-import { joinClassroom } from "../../Services/api";
+import {} from "../../Services/api";
 
 const Home = () => {
+  const { setUser } = useAuth();
   const navigate = useNavigate();
   const [joinCode, setJoinCode] = useState("");
   const [uid, setUid] = useState("");
@@ -20,14 +22,20 @@ const Home = () => {
     }
   };
 
+  const handleInstructorView = () => {
+    setUser(uid);
+    navigate("/instructor");
+  };
+
   return (
-    <div>
+    <div className="Home">
       <input
         type="text"
         value={uid}
         placeholder="netid"
         onChange={(e) => setUid(e.target.value)}
       />
+      {uid && <button onClick={handleInstructorView}>Instructor View</button>}
       <input
         type="text"
         value={joinCode}
@@ -35,7 +43,6 @@ const Home = () => {
         onChange={(e) => setJoinCode(e.target.value)}
       />
       <button onClick={handleJoin}>Join</button>
-      <Link to="/createClass">Create Class</Link>
     </div>
   );
 };

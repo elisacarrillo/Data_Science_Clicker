@@ -1,16 +1,21 @@
+// models/Answer.js
+
 import mongoose, { Schema } from "mongoose";
 
 const AnswerSchema = new Schema(
   {
+    classroom: {
+      type: Schema.Types.ObjectId,
+      ref: "classrooms",
+      required: true,
+    },
     question: {
       type: Schema.Types.ObjectId,
       ref: "questions",
       required: true,
     },
     user: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
-      // required: true,
+      type: String,
     },
     answer: {
       type: String,
@@ -18,7 +23,6 @@ const AnswerSchema = new Schema(
     },
     isCorrect: {
       type: Boolean,
-      // required: true,
     },
     createdAt: {
       type: Date,
@@ -27,11 +31,6 @@ const AnswerSchema = new Schema(
     updatedAt: {
       type: Date,
       default: Date.now,
-    },
-    classroomId: {
-      type: Schema.Types.ObjectId,
-      ref: "classrooms",
-      required: true,
     },
   },
   { timestamps: true }

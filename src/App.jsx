@@ -1,3 +1,5 @@
+// App.jsx
+
 import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -10,7 +12,9 @@ import {
 } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from "./Components/Header";
+import { getClassroom, getCreatedClassrooms } from "./Services/api";
+
+// import Header from "./Components/Header";
 
 // import LandingPage from "./Pages/LandingPage";
 // import CreateClass from "./Pages/CreateClass";
@@ -26,27 +30,30 @@ import Header from "./Components/Header";
 
 import AuthProvider from "./Helpers/AuthProvider";
 
-import TestHome from "./Pages/temp/Home";
-import TestCreateClass from "./Pages/temp/CreateClass";
-import TestClassroomInstructor from "./Pages/temp/ClassroomInstructor";
-import TestClassroomStudent from "./Pages/temp/ClassroomStudent";
+import Home from "./Pages/temp/Home";
+import CreateClass from "./Pages/temp/CreateClass";
+import ClassroomInstructor from "./Pages/temp/ClassroomInstructor";
+import ClassroomStudent from "./Pages/temp/ClassroomStudent";
+import Instructor from "./Pages/temp/Instructor";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <TestHome />,
+    element: <Home />,
   },
   {
-    path: "/createClass",
-    element: <TestCreateClass />,
+    path: "/instructor",
+    element: <Instructor />,
   },
   {
-    path: "/classroom/instructor/:id",
-    element: <TestClassroomInstructor />,
+    path: "instructor/classroom/:classroomId",
+    element: <ClassroomInstructor />,
+    loader: ({ params }) => getClassroom(params.classroomId),
   },
   {
-    path: "/classroom/student/:id",
-    element: <TestClassroomStudent />,
+    path: "student/classroom/:classroomId",
+    element: <ClassroomStudent />,
+    loader: ({ params }) => getClassroom(params.classroomId),
   },
   // {
   //   path: "/",

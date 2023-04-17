@@ -1,37 +1,38 @@
+// api.js
+
 import BASE_URL from "./baseUrl";
 import axios from "axios";
 
-export const joinClassroom = async (joinCode, netid) => {
+// export const joinClassroom = async (joinCode, netid) => {
+//   try {
+//     const response = await axios.post(
+//       `${BASE_URL}/api/users/joinClassroom`,
+//       { netid, joinCode },
+//       { withCredentials: true }
+//     );
+//     return response.data;
+//   } catch (error) {
+//     return false;
+//   }
+// };
+
+export const createClassroom = async (name, instructor, joinCode) => {
   try {
-    const response = await axios.post(
-      `${BASE_URL}/api/users/joinClassroom`,
-      { netid, joinCode },
-      { withCredentials: true }
-    );
+    const response = await axios.post(`${BASE_URL}/api/classrooms`, {
+      name,
+      instructor,
+      joinCode,
+    });
     return response.data;
   } catch (error) {
     return false;
   }
 };
 
-export const createClassroom = async (joinCode, instructorId, name) => {
-  try {
-    const response = await axios.post(
-      `${BASE_URL}/api/classrooms`,
-      { joinCode, instructor: instructorId, name, students: [instructorId] },
-      { withCredentials: true }
-    );
-    return response.data;
-  } catch (error) {
-    return false;
-  }
-};
-
-export const getCreatedClassrooms = async (instructorId) => {
+export const getCreatedClassrooms = async (instructor) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/classrooms?instructor=${instructorId}`,
-      { withCredentials: true }
+      `${BASE_URL}/api/classrooms?instructor=${instructor}`
     );
     return response.data;
   } catch (error) {
@@ -57,10 +58,9 @@ export const getJoinedClassrooms = async (studentId) => {
 export const getClassroom = async (classroomId) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/classrooms?_id=${classroomId}&limit=1`,
-      { withCredentials: true }
+      `${BASE_URL}/api/classrooms?_id=${classroomId}&limit=1`
     );
-    return response.data;
+    return response.data.data[0];
   } catch (error) {
     return false;
   }
@@ -88,11 +88,9 @@ export const getStudents = async (classroom) => {
 
 export const postQuestion = async (question) => {
   try {
-    const response = await axios.post(
-      `${BASE_URL}/api/questions`,
-      { ...question },
-      { withCredentials: true }
-    );
+    const response = await axios.post(`${BASE_URL}/api/questions`, {
+      ...question,
+    });
     return response.data;
   } catch (error) {
     return false;
@@ -131,6 +129,17 @@ export const getAnswerDataCSV = async (questionId) => {
     const response = await axios.get(
       `${BASE_URL}/api/questions/${questionId}/answerDataCSV`,
       { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    return false;
+  }
+};
+
+const getQuestionsInClassroom = async (classroomId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/questions?classroom=${classroomId}`
     );
     return response.data;
   } catch (error) {

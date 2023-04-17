@@ -1,3 +1,5 @@
+// models/Classrooms.js
+
 import mongoose, { Schema } from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
@@ -8,15 +10,15 @@ const ClassroomSchema = new Schema(
       required: true,
     },
     instructor: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
+      type: String,
+      required: true,
     },
     joinCode: {
       type: String,
       required: true,
       unique: true,
     },
-    students: [{ type: Schema.Types.ObjectId, ref: "users" }],
+    // students: [String],
     createdAt: {
       type: Date,
       default: Date.now,
@@ -75,5 +77,4 @@ const ClassroomSchema = new Schema(
 
 ClassroomSchema.plugin(uniqueValidator);
 const Classroom = mongoose.model("classrooms", ClassroomSchema);
-
 export default Classroom;
