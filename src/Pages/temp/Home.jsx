@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getClassroomFromJoinCode } from "../../Services/api";
 
 import "./temp.css";
+import "./Home0.css";
 
 const Home = () => {
   const { setUser } = useAuth();
@@ -34,22 +35,24 @@ const Home = () => {
   };
 
   return (
-    <div className="Home">
-      <h1>dsclicker</h1>
+    <div className="HomeBG">
+      <div className="HomeInt">
+      <h1 className="header">Data Science Clicker</h1>
       <input
         type="text"
         value={uid}
-        placeholder="netid"
+        placeholder="  NetID"
         onChange={(e) => setUid(e.target.value)}
       />
-      <button onClick={handleInstructorView}>Instructor View</button>
+      {/* <button onClick={handleInstructorView}>Instructor View</button> */}
       <input
         type="text"
         value={joinCode}
-        placeholder="join code"
+        placeholder="  Join Code"
         onChange={(e) => setJoinCode(e.target.value)}
       />
       <button onClick={handleJoin}>Join</button>
+      </div>
     </div>
   );
 };
