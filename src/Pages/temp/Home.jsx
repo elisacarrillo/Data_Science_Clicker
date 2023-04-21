@@ -37,7 +37,7 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <div className="HomeTop">
+      <div>
         <h1 className="header">Data Science Clicker</h1>
       </div>
       <div className="HomeMiddle">
@@ -53,11 +53,15 @@ const Home = () => {
           placeholder="Join Code"
           onChange={(e) => setJoinCode(e.target.value)}
         />
-        <button onClick={handleJoin} className="button0">Join Class</button>
-        <button onClick={handleInstructorView} className="button0">Instructor View</button>
+        <button onClick={handleJoin} className="button0">
+          Join Class
+        </button>
+        <button onClick={handleInstructorView} className="button0">
+          Instructor View
+        </button>
       </div>
-      <div className="HomeBottom">
-      </div>
+      {/* <div className="HomeBottom">
+      </div> */}
     </div>
   );
 };

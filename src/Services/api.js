@@ -109,12 +109,19 @@ export const getQuestions = async (classroomId) => {
 
 export const postAnswer = async (answer) => {
   try {
-    const response = await axios.post(
-      `${BASE_URL}/api/answers`,
-      { ...answer },
-      { withCredentials: true }
-    );
+    const response = await axios.post(`${BASE_URL}/api/answers`, { ...answer });
     return response.data;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const getAnswers = async (questionId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/answers?question=${questionId}`
+    );
+    return response.data.data;
   } catch (error) {
     return false;
   }
