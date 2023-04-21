@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLoaderData, Link } from "react-router-dom";
 import { postQuestion } from "../../Services/api";
 import socket from "../../socket";
+import "./Classroom.css"
 
 const ClassroomInstructorView = () => {
   const { classroomId } = useParams();
@@ -41,17 +42,19 @@ const ClassroomInstructorView = () => {
   return !classroomData ? (
     <div>Loading...</div>
   ) : (
-    <div>
-      <h1>{classroomData.name}</h1>
-      <h2>Instructor {classroomData.instructor}</h2>
-      <h2>Join Code: {classroomData.joinCode}</h2>
-      <Link to="/instructor">Back</Link>
-      <QuestionsList
-        questions={questions}
-        activeQuestion={activeQuestion}
-        toggleActiveQuestion={toggleActiveQuestion}
-      />
-      <CreateQuestionForm handlePostQuestion={handlePostQuestion} />
+    <div className="Classroom0">
+        <div className="Content0">
+        <h1>{classroomData.name}</h1>
+        <h2>Instructor {classroomData.instructor}</h2>
+        <h2>Join Code: {classroomData.joinCode}</h2>
+        <Link to="/instructor">Back</Link>
+        <QuestionsList
+          questions={questions}
+          activeQuestion={activeQuestion}
+          toggleActiveQuestion={toggleActiveQuestion}
+        />
+        <CreateQuestionForm handlePostQuestion={handlePostQuestion} />
+      </div>
     </div>
   );
 };

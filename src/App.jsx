@@ -37,6 +37,7 @@ import AuthProvider from "./Helpers/AuthProvider";
 import Home from "./Pages/temp/Home";
 import ClassroomInstructor from "./Pages/temp/ClassroomInstructor";
 import ClassroomStudent from "./Pages/temp/ClassroomStudent";
+import ClassroomInstructorKaz from "./Pages/temp/Kaz Test/ClassroomInstructorKaz";
 import Instructor from "./Pages/temp/Instructor";
 
 const router = createBrowserRouter([
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "instructor/classroom/:classroomId",
-    element: <ClassroomInstructor />,
+    element: <ClassroomInstructorKaz />,
     loader: async ({ params }) => {
       return {
         classroomData: await getClassroom(params.classroomId),
