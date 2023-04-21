@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { getClassroomFromJoinCode } from "../../Services/api";
 
 import "./temp.css";
+import "./Home0.css";
+import footer from "./spikes.png";
 
 const Home = () => {
   const { setUser } = useAuth();
@@ -35,21 +37,31 @@ const Home = () => {
 
   return (
     <div className="Home">
-      <h1>dsclicker</h1>
-      <input
-        type="text"
-        value={uid}
-        placeholder="netid"
-        onChange={(e) => setUid(e.target.value)}
-      />
-      <button onClick={handleInstructorView}>Instructor View</button>
-      <input
-        type="text"
-        value={joinCode}
-        placeholder="join code"
-        onChange={(e) => setJoinCode(e.target.value)}
-      />
-      <button onClick={handleJoin}>Join</button>
+      <div>
+        <h1 className="header">Data Science Clicker</h1>
+      </div>
+      <div className="HomeMiddle">
+        <input
+          type="text"
+          value={uid}
+          placeholder="NetID"
+          onChange={(e) => setUid(e.target.value)}
+        />
+        <input
+          type="text"
+          value={joinCode}
+          placeholder="Join Code"
+          onChange={(e) => setJoinCode(e.target.value)}
+        />
+        <button onClick={handleJoin} className="button0">
+          Join Class
+        </button>
+        <button onClick={handleInstructorView} className="button0">
+          Instructor View
+        </button>
+      </div>
+      {/* <div className="HomeBottom">
+      </div> */}
     </div>
   );
 };

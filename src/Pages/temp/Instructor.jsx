@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Helpers/AuthProvider";
 import { createClassroom, getCreatedClassrooms } from "../../Services/api";
+import "./Home0.css"
 
 const Instructor = () => {
   const { user } = useAuth();
@@ -19,18 +20,22 @@ const Instructor = () => {
 
   return (
     <div className="Instructor">
-      <h1>Instructor {user}</h1>
-      <ul>
-        {classrooms.map((classroom) => (
-          <li key={classroom._id}>
-            <Link to={`/instructor/classroom/${classroom._id}`}>
-              {classroom.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <CreateClassForm />
-      <Link to="/">Back</Link>
+      <div className="HomeTop">
+      </div>
+          <h1 className="header">Data Science Clicker</h1>
+          <h1>Instructor {user}</h1>
+          <ul>
+            {classrooms.map((classroom) => (
+              <li key={classroom._id}>
+                <Link to={`/instructor/classroom/${classroom._id}`}>
+                  {classroom.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <CreateClassForm />
+          <Link to="/">Back</Link>
+       <div className="HomeBottom"></div>
     </div>
   );
 };
@@ -54,7 +59,6 @@ const CreateClassForm = () => {
   if (!user) return <Link to="/">Back</Link>;
   return (
     <div className="CreateClassForm">
-      <h1>Create Class</h1>
       <form>
         <input
           type="text"
@@ -68,7 +72,7 @@ const CreateClassForm = () => {
           placeholder="join code"
           onChange={(e) => setJoinCode(e.target.value)}
         />
-        <button onClick={handleCreateClassroom}>Create</button>
+        <button onClick={handleCreateClassroom} className="button0">Create</button>
       </form>
     </div>
   );

@@ -1,0 +1,11 @@
+.Classroom0 {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.content {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+}

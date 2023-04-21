@@ -1,0 +1,27 @@
+.InstructorViewKaz {
+    height: 100%;
+}
+
+.NavBar0 {
+    position: absolute;
+    z-index: 2;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(19,41,75,1) 44%, rgba(0,146,168,1) 100%);
+    width: 15%;
+    top: 0;
+    height: 100vh;
+}
+.NavBar0 h1 {
+    color: white;
+}
+
+.nav-item {
+    color: white;
+    font-size: 25px;
+    margin-bottom: 90px;
+
+}
+
+.Nav {
+    margin-top: 50px;
+}
