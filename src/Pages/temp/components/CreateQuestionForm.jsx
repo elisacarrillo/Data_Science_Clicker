@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./CreateQuestionForm.css"
 
 const CreateQuestionForm = ({ handlePostQuestion }) => {
   const [questionType, setQuestionType] = useState("multiple-choice");
@@ -42,16 +43,28 @@ const CreateQuestionForm = ({ handlePostQuestion }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Create a new question</h3>
-      <select
-        value={questionType}
-        onChange={(e) => setQuestionType(e.target.value)}
-      >
-        <option value="multiple-choice">Multiple Choice</option>
-        <option value="numeric-input">Numeric Input</option>
-      </select>
+      <div className = "QuestionForm">
+        <div className="QuestionEditor">
 
-      <input
+        </div>
+
+        <div className="QuestionChoices">
+          <button
+            onClick={() => setQuestionType('multiple-choice')}
+            className={questionType === 'multipleChoice' ? 'active' : ''}
+          >
+            Multiple Choice
+          </button>
+          <button
+            onClick={() => setQuestionType('numeric-input')}
+            className={questionType === 'numericInput' ? 'active' : ''}
+          >
+            Numeric Input
+          </button>
+        </div>
+      </div>
+
+      {/* <input
         type="text"
         placeholder="Question prompt"
         value={questionPrompt}
@@ -85,7 +98,7 @@ const CreateQuestionForm = ({ handlePostQuestion }) => {
           value={numericAnswer}
           onChange={(e) => setNumericAnswer(e.target.value)}
         />
-      )}
+      )} */}
 
       <button type="submit">Add question</button>
     </form>

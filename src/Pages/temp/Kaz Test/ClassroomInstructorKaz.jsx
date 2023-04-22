@@ -7,62 +7,9 @@ import "./ClassroomInstructorKaz.css";
 import QuestionsList from "../components/QuestionsList";
 import CreateQuestionForm from "../components/CreateQuestionForm";
 import { postQuestion, getAnswers } from "../../../Services/api";
+import Dashboard from "./DashboardContent/Dashboard.jsx"
+import Statistics from "./DashboardContent/Statistics";
 
-const Dashboard = ({ classroomData }) => {
-  return (
-    <>
-      <h1>{classroomData.name} Dashboard</h1>
-      <h2>Join Code: {classroomData.joinCode}</h2>
-    </>
-  );
-};
-
-const Statistics = ({ questions }) => {
-  //   console.log("herereerere");
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [answers, setAnswers] = useState([]);
-
-  useEffect(() => {
-    if (selectedQuestion) {
-      const fetchAnswers = async () => {
-        const answersData = await getAnswers(selectedQuestion._id);
-        console.log("answers", answersData);
-        setAnswers(answersData);
-      };
-      fetchAnswers();
-    }
-  }, [selectedQuestion]);
-
-  return (
-    <>
-      <h1>Statistics</h1>
-      <select
-        value={selectedQuestion?._id || ""}
-        onChange={(e) => {
-          const question = questions.find((q) => q._id === e.target.value);
-          setSelectedQuestion(question);
-        }}
-      >
-        <option value="">Select a question</option>
-        {questions.map((question) => (
-          <option key={question._id} value={question._id}>
-            {question.prompt}
-          </option>
-        ))}
-      </select>
-      {selectedQuestion && (
-        <>
-          <h2>{selectedQuestion.prompt}</h2>
-          <ul>
-            {answers.map((answer, index) => (
-              <li key={index}>{JSON.stringify(answer)}</li>
-            ))}
-          </ul>
-        </>
-      )}
-    </>
-  );
-};
 
 const NavItem = ({ isActive, onClick, children }) => {
   return (
@@ -159,6 +106,7 @@ const ClassroomInstructorView = () => {
           </NavItem>
         </div>
       </div>
+      <div className="Profile"> <h1 className="ProfileHeader">{classroomData.name}</h1></div>
       <div className="Content">{activeNavItem && content[activeNavItem]}</div>
     </div>
   );
