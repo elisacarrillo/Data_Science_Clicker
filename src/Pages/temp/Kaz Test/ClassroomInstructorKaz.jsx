@@ -7,8 +7,9 @@ import "./ClassroomInstructorKaz.css";
 import QuestionsList from "../components/QuestionsList";
 import CreateQuestionForm from "../components/CreateQuestionForm";
 import { postQuestion, getAnswers } from "../../../Services/api";
-import Dashboard from "./DashboardContent/Dashboard.jsx"
-import Statistics from "./DashboardContent/Statistics";
+import Dashboard from "./NavBarPages/Dashboard.jsx"
+import Statistics from "./NavBarPages/Statistics";
+
 
 
 const NavItem = ({ isActive, onClick, children }) => {
@@ -73,6 +74,7 @@ const ClassroomInstructorView = () => {
     <div className="InstructorViewKaz">
       <div className="NavBar0">
         <h1>Data Science Clicker</h1>
+        <hr/>
         <div className="Nav">
           <NavItem
             isActive={activeNavItem === "dash"}
@@ -106,7 +108,6 @@ const ClassroomInstructorView = () => {
           </NavItem>
         </div>
       </div>
-      <div className="Profile"> <h1 className="ProfileHeader">{classroomData.name}</h1></div>
       <div className="Content">{activeNavItem && content[activeNavItem]}</div>
     </div>
   );

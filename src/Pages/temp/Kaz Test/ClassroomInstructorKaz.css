@@ -13,12 +13,14 @@
 }
 .NavBar0 h1 {
     color: white;
+    font-family: Play;
 }
 
 .nav-item {
     color: white;
     font-size: 25px;
     margin-bottom: 90px;
+    font-family: Play;
 
 }
 
@@ -38,4 +40,9 @@
     color: white;
     font-size: 40px;
     align-items: left;
+}
+
+@font-face {
+    font-family: Play;
+    src: url(../components/Play/Play-Regular.ttf);
 }
