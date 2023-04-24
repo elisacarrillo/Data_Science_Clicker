@@ -1,48 +1,85 @@
 .InstructorViewKaz {
+    display: flex;
+    flex-direction: row;
     height: 100vh;
-}
-
-.NavBar0 {
-    position: absolute;
-    z-index: 2;
+  }
+  .Content {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 85%;
+  }
+  
+  .NavBar0 {
     background: rgb(2,0,36);
     background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(19,41,75,1) 44%, rgba(0,146,168,1) 100%);
     width: 15%;
     top: 0;
-    height: 100%;
-}
-.NavBar0 h1 {
+    bottom: 0;
+  }
+  
+  .NavBar0 h1 {
     color: white;
     font-family: Play;
-}
-
-.nav-item {
+  }
+  
+  .nav-item {
     color: white;
     font-size: 25px;
     margin-bottom: 90px;
     font-family: Play;
-
-}
-
-.Nav {
+  }
+  
+  .Nav {
     margin-top: 50px;
-}
-.active {
+  }
+  
+  .active {
     text-decoration: underline ;
-}
-
-.Profile {
+  }
+  
+  .Profile {
+    margin-top: 10px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 10%;
-    background-color: black;
-}
-.ProfileHeader {
+  }
+  
+  .ProfileHeader {
     color: white;
     font-size: 40px;
-    align-items: left;
-}
-
-@font-face {
+  }
+  
+  @font-face {
     font-family: Play;
     src: url(../components/Play/Play-Regular.ttf);
-}
+  }
+  
+  .profile h1 {
+    color: white;
+  }
+  
+  .ProfileBox {
+    width: 18%;
+    height: 100%;
+    border-right: 5px solid white;
+    background-color: black;
+  }
+  
+  .NextClassBox {
+ 
+    width: 65%;
+    height: 100%;
+    background-color: black;
+  }
+  
+
+  
+  .Display { 
+    width: 100%;
+    height: 80%;
+
+  }
+  

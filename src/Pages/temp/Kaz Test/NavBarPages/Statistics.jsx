@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Statistics.css"
 
 const Statistics = ({ questions }) => {
     //   console.log("herereerere");
@@ -19,6 +20,7 @@ const Statistics = ({ questions }) => {
     return (
       <>
         <h1>Statistics</h1>
+        <div className="StatisticsContent">
         <select
           value={selectedQuestion?._id || ""}
           onChange={(e) => {
@@ -43,6 +45,7 @@ const Statistics = ({ questions }) => {
             </ul>
           </>
         )}
+        </div>
       </>
     );
   };

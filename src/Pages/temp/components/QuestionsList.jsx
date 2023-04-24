@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import "./QuestionsList.css"
 
 const QuestionsList = ({ questions, activeQuestion, toggleActiveQuestion }) => {
   return (
     <>
-      <h3>Questions</h3>
+      <h1>Questions</h1>
+      <div className="QuestionsList">
       <ul>
         {questions.map((question) => (
           <li
@@ -14,6 +16,7 @@ const QuestionsList = ({ questions, activeQuestion, toggleActiveQuestion }) => {
           </li>
         ))}
       </ul>
+      </div>
     </>
   );
 };

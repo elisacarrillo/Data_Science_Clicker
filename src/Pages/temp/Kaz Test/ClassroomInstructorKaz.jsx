@@ -108,7 +108,22 @@ const ClassroomInstructorView = () => {
           </NavItem>
         </div>
       </div>
-      <div className="Content">{activeNavItem && content[activeNavItem]}</div>
+      
+      <div className="Content">
+        
+         <div className="Profile">
+          <div className="ProfileBox">
+            <h1 className="ProfileHeader"> {classroomData.name}'s Room</h1>
+          </div>
+          <div className="NextClassBox">
+            <h1 className="ProfileHeader">Join Code: {classroomData.joinCode}</h1>
+          </div>
+          
+        </div>
+        <div className="Display">
+          {activeNavItem && content[activeNavItem]}
+        </div> 
+      </div>
     </div>
   );
 };
